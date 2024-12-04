@@ -1,6 +1,18 @@
 import React from "react";
+import { useEffect } from "react";
+import axios from "axios";
+import { useState } from "react";
 
 const Navbar = () => {
+  const [list, setList] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      let data = await axios.get("http://localhost:8000/navItem");
+      setList(data.data.menuItem.split(","));
+    }
+    fetchData();
+  }, []);
   return (
     <>
       <div className="">
@@ -14,76 +26,18 @@ const Navbar = () => {
           </div>
           <div>
             <ul className=" flex items-center gap-8 font-jost text-lg">
-              <li>
-                <a
-                  className="relative inline-block text-gray-800 hover:text-black transition-colors duration-300 
+              {list.map((item, i) => (
+                <li key={i}>
+                  <a
+                    className="relative inline-block text-gray-800 hover:text-black transition-colors duration-300 
                after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] 
                after:w-0 after:bg-buttonColor after:transition-all after:duration-300 hover:after:w-full"
-                  href="#"
-                >
-                  Home
-                </a>
-              </li>
-              <li>
-                <a
-                  className="relative inline-block text-gray-800 hover:text-black transition-colors duration-300 
-               after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] 
-               after:w-0 after:bg-buttonColor after:transition-all after:duration-300 hover:after:w-full"
-                  href="#"
-                >
-                  About
-                </a>
-              </li>
-              <li>
-                <a
-                  className="relative inline-block text-gray-800 hover:text-black transition-colors duration-300 
-               after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] 
-               after:w-0 after:bg-buttonColor after:transition-all after:duration-300 hover:after:w-full"
-                  href="#"
-                >
-                  Services
-                </a>
-              </li>
-              <li>
-                <a
-                  className="relative inline-block text-gray-800 hover:text-black transition-colors duration-300 
-               after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] 
-               after:w-0 after:bg-buttonColor after:transition-all after:duration-300 hover:after:w-full"
-                  href="#"
-                >
-                  Resume
-                </a>
-              </li>
-              <li>
-                <a
-                  className="relative inline-block text-gray-800 hover:text-black transition-colors duration-300 
-               after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] 
-               after:w-0 after:bg-buttonColor after:transition-all after:duration-300 hover:after:w-full"
-                  href="#"
-                >
-                  Portfolio
-                </a>
-              </li>
-              <li>
-                <a
-                  className="relative inline-block text-gray-800 hover:text-black transition-colors duration-300 
-               after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] 
-               after:w-0 after:bg-buttonColor after:transition-all after:duration-300 hover:after:w-full"
-                  href="#"
-                >
-                  Testimonial
-                </a>
-              </li>
-              <li>
-                <a
-                  className="relative inline-block text-gray-800 hover:text-black transition-colors duration-300 
-               after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] 
-               after:w-0 after:bg-buttonColor after:transition-all after:duration-300 hover:after:w-full"
-                  href="#"
-                >
-                  Blog
-                </a>
-              </li>
+                    href="#"
+                  >
+                    {item}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
           <div>
