@@ -1,28 +1,46 @@
 import React from "react";
 import axios from "axios";
 import { useState } from "react";
+import { useEffect } from "react";
 
 const Navbar = () => {
   const [menuItem, setMenuItem] = useState("");
   const [buttonText, setButtonText] = useState("");
   const [buttonShow, setButtonShow] = useState(false);
+  const [id, setId] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     console.log(menuItem, buttonText, buttonShow);
-    axios
-      .post("http://localhost:8000/navbar", {
-        menuItem: menuItem,
-        buttonText: buttonText,
-        buttonShow: buttonShow,
-      })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+
+    if (id) {
+      axios
+        .put("http://localhost:8000/navbar/" + id, {
+          menuItem: menuItem,
+          buttonText: buttonText,
+          buttonShow: buttonShow,
+        })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      axios
+        .post("http://localhost:8000/navbar", {
+          menuItem: menuItem,
+          buttonText: buttonText,
+          buttonShow: buttonShow,
+        })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   const handleMenuItemChange = (e) => {
@@ -37,6 +55,18 @@ const Navbar = () => {
     setButtonShow(e.target.checked);
   };
 
+  useEffect(() => {
+    async function getData() {
+      let data = await axios.get("http://localhost:8000/navItem");
+      console.log(data);
+      setMenuItem(data.data.menuItem);
+      setButtonText(data.data.buttonText);
+      setButtonShow(data.data.buttonShow);
+      setId(data.data._id);
+    }
+    getData();
+  }, []);
+
   return (
     <>
       <div className=" flex justify-center items-center h-screen">
@@ -48,18 +78,21 @@ const Navbar = () => {
           <input
             onChange={handleMenuItemChange}
             type="text"
+            value={menuItem}
             placeholder="Menu Item"
             className=" p-2 rounded-md"
           />
           <input
             onChange={handleButtonText}
             type="text"
+            value={buttonText}
             placeholder="Button Text"
             className=" p-2 rounded-md"
           />
           <div className=" flex items-center gap-1">
             <input
               onChange={handleButtonCheckbox}
+              checked={buttonShow}
               type="checkbox"
               className=" w-4 h-4"
             />

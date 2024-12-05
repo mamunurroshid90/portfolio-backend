@@ -7,8 +7,6 @@ const Navbar = require("./model/navbarModel");
 app.use(cors());
 app.use(express.json());
 
-const port = 8000;
-
 mongoose
   .connect(
     "mongodb+srv://roshidmamun2024:dqjdzRXbEgWOnL68@cluster0.1kfb0.mongodb.net/test?retryWrites=true&w=majority&appName=Cluster0"
@@ -27,6 +25,12 @@ app.get("/navItem", async function (req, res) {
   res.send(data);
 });
 
-app.listen(port, () => {
-  console.log("node js");
+app.put("/navbar/:id", function (req, res) {
+  console.log(req.params.id);
+  console.log(req.body);
+  Navbar.findByIdAndUpdate(req.params.id, req.body).then(() => {
+    res.send({ message: "Navbar Updated" });
+  });
 });
+
+app.listen(8000);

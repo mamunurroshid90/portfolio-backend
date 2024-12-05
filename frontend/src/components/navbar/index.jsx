@@ -5,11 +5,15 @@ import { useState } from "react";
 
 const Navbar = () => {
   const [list, setList] = useState([]);
+  const [buttonText, setButtonText] = useState("");
+  const [buttonShow, setButtonShow] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
       let data = await axios.get("http://localhost:8000/navItem");
       setList(data.data.menuItem.split(","));
+      setButtonText(data.data.buttonText);
+      setButtonShow(data.data.buttonShow);
     }
     fetchData();
   }, []);
@@ -41,9 +45,11 @@ const Navbar = () => {
             </ul>
           </div>
           <div>
-            <button className=" py-3 px-8 rounded-md bg-buttonColor text-[#fff] font-jost text-lg hover:bg-buttonHover hover:transition-all hover:ease-linear hover:delay-150">
-              Contact Us
-            </button>
+            {buttonShow && (
+              <button className=" py-3 px-8 rounded-md bg-buttonColor text-[#fff] font-jost text-lg hover:bg-buttonHover hover:transition-all hover:ease-linear hover:delay-150">
+                {buttonText}
+              </button>
+            )}
           </div>
         </nav>
       </div>
