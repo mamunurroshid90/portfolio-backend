@@ -15,16 +15,11 @@ mongoose
   )
   .then(() => console.log("Connected!"));
 
-// app.get("/", (req, res) => {
-//   res.send("Hello from my first ever server");
-// });
-
 app.post("/navbar", function (req, res) {
-  // res.send("Hello World");
   console.log(req.body);
   let data = new Navbar(req.body);
   data.save();
-  res.send(data);
+  res.send({ message: "Navbar Created" });
 });
 
 app.get("/navItem", async function (req, res) {
