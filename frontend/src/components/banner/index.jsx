@@ -5,7 +5,7 @@ import BannerImg from "../../assets/images/bannerImage.jpg";
 const Banner = () => {
   return (
     <>
-      <div className=" container">
+      <div className=" container mb-[128px]">
         <div className=" grid grid-cols-[55fr,45fr] gap-9 items-center">
           <div className=" ">
             <div className=" flex items-center gap-1">
