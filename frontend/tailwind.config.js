@@ -21,6 +21,7 @@ export default {
         buttonColor: "#FF6B00",
         buttonHover: "#FF8B00",
         bgColor: "#FFF5EF",
+        textColor: "#606060",
       },
     },
   },
