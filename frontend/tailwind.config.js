@@ -14,14 +14,14 @@ export default {
           // "2xl": "1496px",
         },
       },
-    },
-    fontFamily: {
-      jost: ["Jost", "sans-serif"],
-    },
-    colors: {
-      buttonColor: "#FF6B00",
-      buttonHover: "#FF8B00",
-      bgColor: "#FFF5EF",
+      fontFamily: {
+        jost: ["Jost", "sans-serif"],
+      },
+      colors: {
+        buttonColor: "#FF6B00",
+        buttonHover: "#FF8B00",
+        bgColor: "#FFF5EF",
+      },
     },
   },
   plugins: [],

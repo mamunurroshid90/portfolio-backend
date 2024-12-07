@@ -19,8 +19,8 @@ const Navbar = () => {
   }, []);
   return (
     <>
-      <div className="">
-        <nav className=" flex justify-between items-center">
+      <div className=" container">
+        <nav className=" flex justify-between items-center py-6">
           <div className=" w-[135px] h-[47px] overflow-hidden">
             <img
               src="/src/assets/images/Logo.png"
