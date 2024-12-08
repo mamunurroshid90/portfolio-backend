@@ -72,8 +72,11 @@ const Navbar = () => {
       <div className=" flex justify-center items-center h-screen">
         <form
           action=""
-          className=" flex flex-col gap-4 bg-slate-700 p-6 rounded-md"
+          className=" flex flex-col gap-4 bg-slate-700 p-6 rounded-md w-[600px]"
         >
+          <h2 className=" text-center text-2xl pb-4 border-b-4 border-double font-bold text-white">
+            Navbar Section
+          </h2>
           <input type="file" className=" rounded-md text-white" />
           <input
             onChange={handleMenuItemChange}

@@ -3,6 +3,7 @@ const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
 const Navbar = require("./model/navbarModel");
+const Banner = require("./model/BannerModel");
 
 app.use(cors());
 app.use(express.json());
@@ -13,6 +14,7 @@ mongoose
   )
   .then(() => console.log("Connected!"));
 
+// Navbar routes start here
 app.post("/navbar", function (req, res) {
   console.log(req.body);
   let data = new Navbar(req.body);
@@ -32,5 +34,31 @@ app.put("/navbar/:id", function (req, res) {
     res.send({ message: "Navbar Updated" });
   });
 });
+
+// Navbar routes end here
+
+// ==================================
+
+// Banner routes start here
+app.post("/banner", function (req, res) {
+  console.log(req.body);
+  let data = new Banner(req.body);
+  data.save();
+  res.send({ message: "banner Created" });
+});
+
+app.get("/banner", async function (req, res) {
+  let data = await Banner.findOne({});
+  res.send(data);
+});
+
+app.put("/banner/:id", function (req, res) {
+  console.log(req.params.id);
+  console.log(req.body);
+  Banner.findByIdAndUpdate(req.params.id, req.body).then(() => {
+    res.send({ message: "Banner Updated" });
+  });
+});
+// Banner routes end here
 
 app.listen(8000);
