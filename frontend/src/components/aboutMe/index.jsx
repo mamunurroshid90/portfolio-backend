@@ -21,10 +21,10 @@ const AboutMe = () => {
               <img src={RoundIcon} alt="round icon" />
               <h4 className=" font-jost text-lg">About Me</h4>
             </div>
-            <h2 className=" text-[58px] font-jost font-bold">
+            <h2 className=" text-[58px] font-jost font-bold leading-[70px]">
               I Can Design Anything You Want
             </h2>
-            <p className=" text-lg text-textColor font-jost leading-[30px] mt-11 mb-12">
+            <p className=" text-lg text-textColor font-jost leading-[30px] my-8">
               Nam libero tempore, cum soluta nobis est eligendi optio cumque
               nihil impedit quo minus id quod maxime placeat facere possimus,
               omnis voluptas assumenda est, omnis dolor repellendus. Temporibus
@@ -58,6 +58,25 @@ const AboutMe = () => {
                   </h3>
                 </div>
               </div>
+            </div>
+            <div className=" my-9 flex flex-col gap-5">
+              <div className=" flex items-center gap-3">
+                <img src={CheckIcon} alt="check icon" />
+                <h5 className=" text-base font-alef">
+                  Work simple and cline design
+                </h5>
+              </div>
+              <div className=" flex items-center gap-3">
+                <img src={CheckIcon} alt="check icon" />
+                <h5 className=" text-base font-alef">
+                  New idea and user friendly design
+                </h5>
+              </div>
+            </div>
+            <div>
+              <button className=" bg-buttonColor py-3 px-7 rounded-md text-white font-jost font-semibold hover:bg-buttonHover transition-all duration-100 ease-linear">
+                Download My CV
+              </button>
             </div>
           </div>
         </div>

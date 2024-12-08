@@ -16,6 +16,7 @@ export default {
       },
       fontFamily: {
         jost: ["Jost", "sans-serif"],
+        alef: ["Alef", "sans-serif"],
       },
       colors: {
         buttonColor: "#FF6B00",
