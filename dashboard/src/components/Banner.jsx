@@ -31,7 +31,9 @@ const Banner = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(subHeading, heading, paragraph, buttonText, buttonShow);
+
+    // console.log(subHeading, heading, paragraph, buttonText, buttonShow, id);
+
     if (id) {
       axios
         .put("http://localhost:8000/banner/" + id, {
@@ -69,7 +71,7 @@ const Banner = () => {
     async function fetchData() {
       console.log("Mamun");
       let data = await axios.get("http://localhost:8000/banner");
-      console.log(data.data);
+      console.log(data);
       setSubheading(data.data.subHeading);
       setHeading(data.data.heading);
       setParagraph(data.data.paragraph);
