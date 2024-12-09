@@ -21,8 +21,8 @@ const Services = () => {
           <h1 className=" text-[44px] font-jost font-bold uppercase mt-3 text-center">
             Services I offer
           </h1>
-          <div className=" flex flex-wrap gap-4">
-            <div className=" w-[286px] h-[280px] border-2 border-bgColor rounded-md flex flex-col items-center py-[50px] px-[30px] hover:bg-bgColor transition-all duration-200 ease-linear">
+          <div className=" flex flex-wrap gap-5 mt-10">
+            <div className=" w-[286px] h-[290px] border-2 border-bgColor rounded-md flex flex-col items-center py-[30px] px-[20px] hover:bg-bgColor transition-all duration-200 ease-linear">
               <div className=" w-[55px] h-[55px] overflow-hidden">
                 <img
                   src={UiUx}
@@ -30,7 +30,7 @@ const Services = () => {
                   className=" w-full h-full object-cover"
                 />
               </div>
-              <h3 className=" text-[24px] font-jost font-medium mt-[25px] mb-[13px]">
+              <h3 className=" text-[24px] font-jost font-medium mt-[15px] mb-[10px]">
                 UI/UX Design
               </h3>
               <p className=" font-alef text-textColor text-center">
@@ -38,128 +38,112 @@ const Services = () => {
                 prevents our being able
               </p>
             </div>
-            <div className=" w-[286px] h-[280px] border-2 border-bgColor rounded-md flex flex-col items-center py-[50px] px-[30px] hover:bg-bgColor transition-all duration-200 ease-linear">
+            <div className=" w-[286px] h-[290px] border-2 border-bgColor rounded-md flex flex-col items-center py-[30px] px-[20px] hover:bg-bgColor transition-all duration-200 ease-linear">
               <div className=" w-[55px] h-[55px] overflow-hidden">
                 <img
-                  src={UiUx}
+                  src={MobileApp}
                   alt="ui-ux-icon"
                   className=" w-full h-full object-cover"
                 />
               </div>
-              <h3 className=" text-[24px] font-jost font-medium mt-[25px] mb-[13px]">
-                UI/UX Design
+              <h3 className=" text-[24px] font-jost font-medium mt-[15px] mb-[10px]">
+                Mobile App
               </h3>
               <p className=" font-alef text-textColor text-center">
                 Hen our power of choice is untrammelled and when nothing
                 prevents our being able
               </p>
             </div>
-            <div className=" w-[286px] h-[280px] border-2 border-bgColor rounded-md flex flex-col items-center py-[50px] px-[30px] hover:bg-bgColor transition-all duration-200 ease-linear">
+            <div className=" w-[286px] h-[290px] border-2 border-bgColor rounded-md flex flex-col items-center py-[30px] px-[20px] hover:bg-bgColor transition-all duration-200 ease-linear">
               <div className=" w-[55px] h-[55px] overflow-hidden">
                 <img
-                  src={UiUx}
+                  src={Graphics}
                   alt="ui-ux-icon"
                   className=" w-full h-full object-cover"
                 />
               </div>
-              <h3 className=" text-[24px] font-jost font-medium mt-[25px] mb-[13px]">
-                UI/UX Design
+              <h3 className=" text-[24px] font-jost font-medium mt-[15px] mb-[10px]">
+                Graphic Design
               </h3>
               <p className=" font-alef text-textColor text-center">
                 Hen our power of choice is untrammelled and when nothing
                 prevents our being able
               </p>
             </div>
-            <div className=" w-[286px] h-[280px] border-2 border-bgColor rounded-md flex flex-col items-center py-[50px] px-[30px] hover:bg-bgColor transition-all duration-200 ease-linear">
+            <div className=" w-[286px] h-[290px] border-2 border-bgColor rounded-md flex flex-col items-center py-[30px] px-[20px] hover:bg-bgColor transition-all duration-200 ease-linear">
               <div className=" w-[55px] h-[55px] overflow-hidden">
                 <img
-                  src={UiUx}
+                  src={WebDeveloper}
                   alt="ui-ux-icon"
                   className=" w-full h-full object-cover"
                 />
               </div>
-              <h3 className=" text-[24px] font-jost font-medium mt-[25px] mb-[13px]">
-                UI/UX Design
+              <h3 className=" text-[24px] font-jost font-medium mt-[15px] mb-[10px]">
+                Web Developer
               </h3>
               <p className=" font-alef text-textColor text-center">
                 Hen our power of choice is untrammelled and when nothing
                 prevents our being able
               </p>
             </div>
-            <div className=" w-[286px] h-[280px] border-2 border-bgColor rounded-md flex flex-col items-center py-[50px] px-[30px] hover:bg-bgColor transition-all duration-200 ease-linear">
+            <div className=" w-[286px] h-[290px] border-2 border-bgColor rounded-md flex flex-col items-center py-[30px] px-[20px] hover:bg-bgColor transition-all duration-200 ease-linear">
               <div className=" w-[55px] h-[55px] overflow-hidden">
                 <img
-                  src={UiUx}
+                  src={Seo}
                   alt="ui-ux-icon"
                   className=" w-full h-full object-cover"
                 />
               </div>
-              <h3 className=" text-[24px] font-jost font-medium mt-[25px] mb-[13px]">
-                UI/UX Design
+              <h3 className=" text-[24px] font-jost font-medium mt-[15px] mb-[10px]">
+                SEO Optimisation
               </h3>
               <p className=" font-alef text-textColor text-center">
                 Hen our power of choice is untrammelled and when nothing
                 prevents our being able
               </p>
             </div>
-            <div className=" w-[286px] h-[280px] border-2 border-bgColor rounded-md flex flex-col items-center py-[50px] px-[30px] hover:bg-bgColor transition-all duration-200 ease-linear">
+            <div className=" w-[286px] h-[290px] border-2 border-bgColor rounded-md flex flex-col items-center py-[30px] px-[20px] hover:bg-bgColor transition-all duration-200 ease-linear">
               <div className=" w-[55px] h-[55px] overflow-hidden">
                 <img
-                  src={UiUx}
+                  src={Wordpress}
                   alt="ui-ux-icon"
                   className=" w-full h-full object-cover"
                 />
               </div>
-              <h3 className=" text-[24px] font-jost font-medium mt-[25px] mb-[13px]">
-                UI/UX Design
+              <h3 className=" text-[24px] font-jost font-medium mt-[15px] mb-[10px]">
+                WordPress Developer
               </h3>
               <p className=" font-alef text-textColor text-center">
                 Hen our power of choice is untrammelled and when nothing
                 prevents our being able
               </p>
             </div>
-            <div className=" w-[286px] h-[280px] border-2 border-bgColor rounded-md flex flex-col items-center py-[50px] px-[30px] hover:bg-bgColor transition-all duration-200 ease-linear">
+            <div className=" w-[286px] h-[290px] border-2 border-bgColor rounded-md flex flex-col items-center py-[30px] px-[20px] hover:bg-bgColor transition-all duration-200 ease-linear">
               <div className=" w-[55px] h-[55px] overflow-hidden">
                 <img
-                  src={UiUx}
+                  src={AppDevelopment}
                   alt="ui-ux-icon"
                   className=" w-full h-full object-cover"
                 />
               </div>
-              <h3 className=" text-[24px] font-jost font-medium mt-[25px] mb-[13px]">
-                UI/UX Design
+              <h3 className=" text-[24px] font-jost font-medium mt-[15px] mb-[10px]">
+                App Development
               </h3>
               <p className=" font-alef text-textColor text-center">
                 Hen our power of choice is untrammelled and when nothing
                 prevents our being able
               </p>
             </div>
-            <div className=" w-[286px] h-[280px] border-2 border-bgColor rounded-md flex flex-col items-center py-[50px] px-[30px] hover:bg-bgColor transition-all duration-200 ease-linear">
+            <div className=" w-[286px] h-[290px] border-2 border-bgColor rounded-md flex flex-col items-center py-[30px] px-[20px] hover:bg-bgColor transition-all duration-200 ease-linear">
               <div className=" w-[55px] h-[55px] overflow-hidden">
                 <img
-                  src={UiUx}
+                  src={Business}
                   alt="ui-ux-icon"
                   className=" w-full h-full object-cover"
                 />
               </div>
-              <h3 className=" text-[24px] font-jost font-medium mt-[25px] mb-[13px]">
-                UI/UX Design
-              </h3>
-              <p className=" font-alef text-textColor text-center">
-                Hen our power of choice is untrammelled and when nothing
-                prevents our being able
-              </p>
-            </div>
-            <div className=" w-[286px] h-[280px] border-2 border-bgColor rounded-md flex flex-col items-center py-[50px] px-[30px] hover:bg-bgColor transition-all duration-200 ease-linear">
-              <div className=" w-[55px] h-[55px] overflow-hidden">
-                <img
-                  src={UiUx}
-                  alt="ui-ux-icon"
-                  className=" w-full h-full object-cover"
-                />
-              </div>
-              <h3 className=" text-[24px] font-jost font-medium mt-[25px] mb-[13px]">
-                UI/UX Design
+              <h3 className=" text-[24px] font-jost font-medium mt-[15px] mb-[10px]">
+                Business Strategy
               </h3>
               <p className=" font-alef text-textColor text-center">
                 Hen our power of choice is untrammelled and when nothing
