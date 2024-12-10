@@ -4,6 +4,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const Navbar = require("./model/navbarModel");
 const Banner = require("./model/BannerModel");
+const Service = require("./model/serviceModel");
 
 app.use(cors());
 app.use(express.json());
@@ -60,5 +61,19 @@ app.put("/banner/:id", function (req, res) {
   });
 });
 // Banner routes end here
+
+// service routes start here
+app.post("/service", async function (req, res) {
+  console.log(req.body);
+  let data = new Service(req.body);
+  data.save();
+  res.send({ message: "Service Created" });
+});
+
+app.get("/service", async function (req, res) {
+  let data = await Service.find({});
+  res.send(data);
+});
+// service routes end here
 
 app.listen(8000);

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Navbar from "./components/Navbar";
 import Banner from "./components/Banner";
+import Services from "./components/Services";
 
 function App() {
   const [activeMenu, setActiveMenu] = useState("Navbar");
@@ -92,7 +93,7 @@ function App() {
             {activeMenu == "Navbar" && <Navbar />}
             {activeMenu == "Banner" && <Banner />}
             {activeMenu == "About" && <h1>About</h1>}
-            {activeMenu == "Service" && <h1>Service</h1>}
+            {activeMenu == "Service" && <Services />}
             {activeMenu == "Resume" && <h1>Resume</h1>}
             {activeMenu == "Portfolio" && <h1>Portfolio</h1>}
             {activeMenu == "Testimonial" && <h1>Testimonial</h1>}
