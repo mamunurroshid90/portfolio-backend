@@ -33,8 +33,11 @@ const Services = () => {
             Services I offer
           </h1>
           <div className=" flex flex-wrap gap-5 mt-10">
-            {list.map((item) => (
-              <div className=" w-[286px] h-[290px] border-2 border-bgColor rounded-md flex flex-col items-center py-[30px] px-[20px] hover:bg-bgColor transition-all duration-200 ease-linear">
+            {list.map((item, index) => (
+              <div
+                key={index}
+                className=" w-[286px] h-[290px] border-2 border-bgColor rounded-md flex flex-col items-center py-[30px] px-[20px] hover:bg-bgColor transition-all duration-200 ease-linear"
+              >
                 <div className=" w-[55px] h-[55px] overflow-hidden">
                   {item.isShowImage && (
                     <img

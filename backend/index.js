@@ -79,6 +79,14 @@ app.delete("/service/:id", async function (req, res) {
   let data = await Service.findByIdAndDelete(req.params.id);
   res.send({ message: "Service Deleted" });
 });
+
+app.put("/service/:id", function (req, res) {
+  console.log(req.params.id);
+  console.log(req.body);
+  Service.findByIdAndUpdate(req.params.id, req.body).then(() => {
+    res.send({ message: "Service Updated" });
+  });
+});
 // service routes end here
 
 app.listen(8000);

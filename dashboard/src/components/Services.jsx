@@ -9,7 +9,17 @@ const Services = () => {
   const [subTitle, setSubTitle] = useState("");
   const [isShowImage, setIsShowImage] = useState(false);
   const [list, setList] = useState([]);
-  const [show, setShow] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [id, setId] = useState("");
+
+  const openModal = (item) => {
+    setIsOpen(true);
+    console.log(item);
+    setTitle(item.title);
+    setSubTitle(item.subTitle);
+    setIsShowImage(item.isShowImage);
+    setId(item._id);
+  };
 
   const handleTitle = (e) => {
     setTitle(e.target.value);
@@ -26,36 +36,65 @@ const Services = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(title, subTitle, isShowImage);
-    axios
-      .post("http://localhost:8000/service", {
-        title: title,
-        subTitle: subTitle,
-        isShowImage: isShowImage,
-      })
-      .then((res) => {
-        // console.log(res);
-        setTitle("");
-        setSubTitle("");
-        setIsShowImage("");
-        toast.success("Data sent successfully", {
-          position: "top-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
+    if (id) {
+      axios
+        .put(`http://localhost:8000/service/${id}`, {
+          title,
+          subTitle,
+          isShowImage,
+        })
+        .then((res) => {
+          axios.get("http://localhost:8000/service").then((res) => {
+            setList(res.data);
+            setIsOpen(false);
+            setTitle("");
+            setSubTitle("");
+            setIsShowImage(false);
+            setId("");
+          });
         });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    } else {
+      axios
+        .post("http://localhost:8000/service", {
+          title: title,
+          subTitle: subTitle,
+          isShowImage: isShowImage,
+        })
+        .then((res) => {
+          // console.log(res);
+          setTitle("");
+          setSubTitle("");
+          setIsShowImage("");
+          toast.success("Data sent successfully", {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   useEffect(() => {
     axios.get("http://localhost:8000/service").then((res) => {
       setList(res.data);
+    });
+  }, []);
+
+  const handleDelete = (item) => {
+    console.log(item._id);
+    axios.delete(`http://localhost:8000/service/${item._id}`).then((res) => {
+      console.log(res.data);
+      axios.get("http://localhost:8000/service").then((res) => {
+        setList(res.data);
+      });
       toast.success("Item deleted", {
         position: "top-right",
         autoClose: 2000,
@@ -66,13 +105,6 @@ const Services = () => {
         progress: undefined,
         theme: "dark",
       });
-    });
-  }, []);
-
-  const handleDelete = (item) => {
-    console.log(item._id);
-    axios.delete(`http://localhost:8000/service/${item._id}`).then((res) => {
-      console.log(res.data);
     });
   };
 
@@ -150,7 +182,10 @@ const Services = () => {
                 <td>{item.subTitle}</td>
                 <td>{item.isShowImage ? "Yes" : "No"}</td>
                 <td className=" flex gap-2">
-                  <button className=" bg-green-700 text-white py-1 px-3 rounded">
+                  <button
+                    onClick={() => openModal(item)}
+                    className=" bg-green-700 text-white py-1 px-3 rounded"
+                  >
                     Edit
                   </button>
                   <button
@@ -164,6 +199,62 @@ const Services = () => {
             ))}
           </table>
         </div>
+      </div>
+      <div className="flex items-center justify-center h-screen">
+        {/* Modal */}
+        {isOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+            <form className=" bg-slate-600 p-6 rounded-md w-[600px] flex flex-col gap-3">
+              <div className="flex justify-end">
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition"
+                >
+                  Close
+                </button>
+              </div>
+              <h2 className=" text-2xl font-bold font-sans text-center text-white">
+                Service Section
+              </h2>
+              <input type="file" />
+              <input
+                onChange={handleTitle}
+                value={title}
+                type="text"
+                placeholder="Title"
+                className=" p-2 rounded-md w-full"
+              />
+              <input
+                onChange={handleSubtitle}
+                value={subTitle}
+                type="text"
+                placeholder="Subtitle"
+                className=" p-2 rounded-md w-full"
+              />
+              <div className=" flex items-center gap-3">
+                <input
+                  checked={isShowImage}
+                  onChange={handleShowImage}
+                  type="checkbox"
+                  className=" w-4 h-4"
+                  id="showImage"
+                />
+                <label htmlFor="showImage" className=" text-white">
+                  Show Image
+                </label>
+              </div>
+              <div>
+                <button
+                  onClick={handleSubmit}
+                  type="submit"
+                  className=" bg-slate-500 text-white font-medium rounded-md py-2 w-full"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
+        )}
       </div>
     </>
   );
