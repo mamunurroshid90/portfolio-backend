@@ -2,12 +2,14 @@ import axios from "axios";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 
 const Services = () => {
   const [title, setTitle] = useState("");
   const [subTitle, setSubTitle] = useState("");
   const [isShowImage, setIsShowImage] = useState(false);
   const [list, setList] = useState([]);
+  const [show, setShow] = useState(false);
 
   const handleTitle = (e) => {
     setTitle(e.target.value);
@@ -31,7 +33,20 @@ const Services = () => {
         isShowImage: isShowImage,
       })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
+        setTitle("");
+        setSubTitle("");
+        setIsShowImage("");
+        toast.success("Data sent successfully", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -41,12 +56,30 @@ const Services = () => {
   useEffect(() => {
     axios.get("http://localhost:8000/service").then((res) => {
       setList(res.data);
+      toast.success("Item deleted", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
     });
   }, []);
 
+  const handleDelete = (item) => {
+    console.log(item._id);
+    axios.delete(`http://localhost:8000/service/${item._id}`).then((res) => {
+      console.log(res.data);
+    });
+  };
+
   return (
     <>
-      <div className=" flex flex-col justify-center items-center h-screen">
+      <ToastContainer />
+      <div className=" flex flex-col justify-center items-center">
         <form className=" bg-slate-600 p-6 rounded-md w-[600px] flex flex-col gap-3">
           <h2 className=" text-2xl font-bold font-sans text-center text-white">
             Service Section
@@ -54,23 +87,27 @@ const Services = () => {
           <input type="file" />
           <input
             onChange={handleTitle}
+            value={title}
             type="text"
             placeholder="Title"
             className=" p-2 rounded-md w-full"
           />
           <input
             onChange={handleSubtitle}
+            value={subTitle}
             type="text"
             placeholder="Subtitle"
             className=" p-2 rounded-md w-full"
           />
           <div className=" flex items-center gap-3">
             <input
+              checked={isShowImage}
               onChange={handleShowImage}
               type="checkbox"
               className=" w-4 h-4"
+              id="showImage"
             />
-            <label htmlFor="" className=" text-white">
+            <label htmlFor="showImage" className=" text-white">
               Show Image
             </label>
           </div>
@@ -88,25 +125,38 @@ const Services = () => {
         <div className=" w-[800px] bg-slate-300 p-7 mt-10 rounded-md">
           <table className=" w-full">
             <tr className=" bg-slate-800 text-white">
+              <th>SR</th>
               <th className=" py-2">Image</th>
               <th>Title</th>
               <th>SubTitle</th>
               <th>Button visibility</th>
               <th>Actions</th>
             </tr>
-            {list.map((item) => (
-              <tr className=" bg-slate-500 text-white">
+            {list.map((item, index) => (
+              <tr className=" bg-slate-500 text-white ">
+                <td>{index + 1}</td>
                 <td className=" ">
-                  <img src="" alt="table image 1" />
+                  {item.isShowImage ? (
+                    <img
+                      src=""
+                      alt="table image 1"
+                      className=" w-20 h-20 bg-red-300"
+                    />
+                  ) : (
+                    "No Preview"
+                  )}
                 </td>
                 <td>{item.title}</td>
                 <td>{item.subTitle}</td>
-                <td>Yes</td>
+                <td>{item.isShowImage ? "Yes" : "No"}</td>
                 <td className=" flex gap-2">
                   <button className=" bg-green-700 text-white py-1 px-3 rounded">
                     Edit
                   </button>
-                  <button className=" bg-red-700 text-white py-1 px-3 rounded">
+                  <button
+                    onClick={() => handleDelete(item)}
+                    className=" bg-red-700 text-white py-1 px-3 rounded"
+                  >
                     Delete
                   </button>
                 </td>

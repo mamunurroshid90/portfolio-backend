@@ -8,8 +8,19 @@ import Seo from "../../assets/images/services icon/seo.png";
 import Wordpress from "../../assets/images/services icon/wordpress.png";
 import AppDevelopment from "../../assets/images/services icon/app development.png";
 import Business from "../../assets/images/services icon/business.png";
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
 
 const Services = () => {
+  const [list, setList] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:8000/service").then((res) => {
+      setList(res.data);
+    });
+  }, []);
+
   return (
     <>
       <div className=" container mt-[130px] ">
@@ -22,134 +33,25 @@ const Services = () => {
             Services I offer
           </h1>
           <div className=" flex flex-wrap gap-5 mt-10">
-            <div className=" w-[286px] h-[290px] border-2 border-bgColor rounded-md flex flex-col items-center py-[30px] px-[20px] hover:bg-bgColor transition-all duration-200 ease-linear">
-              <div className=" w-[55px] h-[55px] overflow-hidden">
-                <img
-                  src={UiUx}
-                  alt="ui-ux-icon"
-                  className=" w-full h-full object-cover"
-                />
+            {list.map((item) => (
+              <div className=" w-[286px] h-[290px] border-2 border-bgColor rounded-md flex flex-col items-center py-[30px] px-[20px] hover:bg-bgColor transition-all duration-200 ease-linear">
+                <div className=" w-[55px] h-[55px] overflow-hidden">
+                  {item.isShowImage && (
+                    <img
+                      src={UiUx}
+                      alt="ui-ux-icon"
+                      className=" w-full h-full object-cover"
+                    />
+                  )}
+                </div>
+                <h3 className=" text-[24px] font-jost font-medium mt-[15px] mb-[10px]">
+                  {item.title}
+                </h3>
+                <p className=" font-alef text-textColor text-center">
+                  {item.subTitle}
+                </p>
               </div>
-              <h3 className=" text-[24px] font-jost font-medium mt-[15px] mb-[10px]">
-                UI/UX Design
-              </h3>
-              <p className=" font-alef text-textColor text-center">
-                Hen our power of choice is untrammelled and when nothing
-                prevents our being able
-              </p>
-            </div>
-            <div className=" w-[286px] h-[290px] border-2 border-bgColor rounded-md flex flex-col items-center py-[30px] px-[20px] hover:bg-bgColor transition-all duration-200 ease-linear">
-              <div className=" w-[55px] h-[55px] overflow-hidden">
-                <img
-                  src={MobileApp}
-                  alt="ui-ux-icon"
-                  className=" w-full h-full object-cover"
-                />
-              </div>
-              <h3 className=" text-[24px] font-jost font-medium mt-[15px] mb-[10px]">
-                Mobile App
-              </h3>
-              <p className=" font-alef text-textColor text-center">
-                Hen our power of choice is untrammelled and when nothing
-                prevents our being able
-              </p>
-            </div>
-            <div className=" w-[286px] h-[290px] border-2 border-bgColor rounded-md flex flex-col items-center py-[30px] px-[20px] hover:bg-bgColor transition-all duration-200 ease-linear">
-              <div className=" w-[55px] h-[55px] overflow-hidden">
-                <img
-                  src={Graphics}
-                  alt="ui-ux-icon"
-                  className=" w-full h-full object-cover"
-                />
-              </div>
-              <h3 className=" text-[24px] font-jost font-medium mt-[15px] mb-[10px]">
-                Graphic Design
-              </h3>
-              <p className=" font-alef text-textColor text-center">
-                Hen our power of choice is untrammelled and when nothing
-                prevents our being able
-              </p>
-            </div>
-            <div className=" w-[286px] h-[290px] border-2 border-bgColor rounded-md flex flex-col items-center py-[30px] px-[20px] hover:bg-bgColor transition-all duration-200 ease-linear">
-              <div className=" w-[55px] h-[55px] overflow-hidden">
-                <img
-                  src={WebDeveloper}
-                  alt="ui-ux-icon"
-                  className=" w-full h-full object-cover"
-                />
-              </div>
-              <h3 className=" text-[24px] font-jost font-medium mt-[15px] mb-[10px]">
-                Web Developer
-              </h3>
-              <p className=" font-alef text-textColor text-center">
-                Hen our power of choice is untrammelled and when nothing
-                prevents our being able
-              </p>
-            </div>
-            <div className=" w-[286px] h-[290px] border-2 border-bgColor rounded-md flex flex-col items-center py-[30px] px-[20px] hover:bg-bgColor transition-all duration-200 ease-linear">
-              <div className=" w-[55px] h-[55px] overflow-hidden">
-                <img
-                  src={Seo}
-                  alt="ui-ux-icon"
-                  className=" w-full h-full object-cover"
-                />
-              </div>
-              <h3 className=" text-[24px] font-jost font-medium mt-[15px] mb-[10px]">
-                SEO Optimisation
-              </h3>
-              <p className=" font-alef text-textColor text-center">
-                Hen our power of choice is untrammelled and when nothing
-                prevents our being able
-              </p>
-            </div>
-            <div className=" w-[286px] h-[290px] border-2 border-bgColor rounded-md flex flex-col items-center py-[30px] px-[20px] hover:bg-bgColor transition-all duration-200 ease-linear">
-              <div className=" w-[55px] h-[55px] overflow-hidden">
-                <img
-                  src={Wordpress}
-                  alt="ui-ux-icon"
-                  className=" w-full h-full object-cover"
-                />
-              </div>
-              <h3 className=" text-[24px] font-jost font-medium mt-[15px] mb-[10px]">
-                WordPress Developer
-              </h3>
-              <p className=" font-alef text-textColor text-center">
-                Hen our power of choice is untrammelled and when nothing
-                prevents our being able
-              </p>
-            </div>
-            <div className=" w-[286px] h-[290px] border-2 border-bgColor rounded-md flex flex-col items-center py-[30px] px-[20px] hover:bg-bgColor transition-all duration-200 ease-linear">
-              <div className=" w-[55px] h-[55px] overflow-hidden">
-                <img
-                  src={AppDevelopment}
-                  alt="ui-ux-icon"
-                  className=" w-full h-full object-cover"
-                />
-              </div>
-              <h3 className=" text-[24px] font-jost font-medium mt-[15px] mb-[10px]">
-                App Development
-              </h3>
-              <p className=" font-alef text-textColor text-center">
-                Hen our power of choice is untrammelled and when nothing
-                prevents our being able
-              </p>
-            </div>
-            <div className=" w-[286px] h-[290px] border-2 border-bgColor rounded-md flex flex-col items-center py-[30px] px-[20px] hover:bg-bgColor transition-all duration-200 ease-linear">
-              <div className=" w-[55px] h-[55px] overflow-hidden">
-                <img
-                  src={Business}
-                  alt="ui-ux-icon"
-                  className=" w-full h-full object-cover"
-                />
-              </div>
-              <h3 className=" text-[24px] font-jost font-medium mt-[15px] mb-[10px]">
-                Business Strategy
-              </h3>
-              <p className=" font-alef text-textColor text-center">
-                Hen our power of choice is untrammelled and when nothing
-                prevents our being able
-              </p>
-            </div>
+            ))}
           </div>
         </div>
       </div>
