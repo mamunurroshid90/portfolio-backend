@@ -3,8 +3,35 @@ import { IoLocationOutline } from "react-icons/io5";
 import { LiaPhoneVolumeSolid } from "react-icons/lia";
 import { TfiEmail } from "react-icons/tfi";
 import RoundIcon from "../../assets/images/round-icon.png";
+import { useState } from "react";
+import axios from "axios";
 
 const Contact = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(name, email, phone, subject, message);
+    axios
+      .post("http://localhost:8000/email", {
+        name,
+        email,
+        phone,
+        subject,
+        message,
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <>
       <div className=" container my-[120px]">
@@ -19,11 +46,13 @@ const Contact = () => {
           <form action="" className=" flex flex-col gap-5">
             <div className=" flex justify-evenly">
               <input
+                onChange={(e) => setName(e.target.value)}
                 type="text"
                 placeholder="Your name"
                 className=" w-[48%] p-3 rounded-md border border-borderColor"
               />
               <input
+                onChange={(e) => setEmail(e.target.value)}
                 type="email"
                 placeholder="Your Email"
                 className=" w-[48%] p-3 rounded-md border border-borderColor"
@@ -31,17 +60,20 @@ const Contact = () => {
             </div>
             <div className=" flex justify-evenly">
               <input
+                onChange={(e) => setPhone(e.target.value)}
                 type="phone"
                 placeholder="Phone"
                 className=" w-[48%] p-3 rounded-md border border-borderColor"
               />
               <input
+                onChange={(e) => setSubject(e.target.value)}
                 type="text"
                 placeholder="Subject"
                 className=" w-[48%] p-3 rounded-md border border-borderColor"
               />
             </div>
             <textarea
+              onChange={(e) => setMessage(e.target.value)}
               name=""
               id=""
               placeholder="Message"
@@ -49,7 +81,10 @@ const Contact = () => {
               className=" p-3 rounded-md border border-borderColor m-3"
             ></textarea>
             <div className=" mt-1 ml-2">
-              <button className=" bg-buttonColor py-2 px-6 rounded-md text-white font-jost">
+              <button
+                onClick={handleSubmit}
+                className=" bg-buttonColor py-2 px-6 rounded-md text-white font-jost"
+              >
                 Send Me Message
               </button>
             </div>

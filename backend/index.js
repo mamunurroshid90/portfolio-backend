@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const Navbar = require("./model/navbarModel");
 const Banner = require("./model/BannerModel");
 const Service = require("./model/serviceModel");
+const nodemailer = require("nodemailer");
 
 const multer = require("multer");
 
@@ -107,5 +108,33 @@ app.put("/service/:id", function (req, res) {
   });
 });
 // service routes end here
+
+// contact form start here
+app.post("/email", async function (req, res) {
+  console.log(req.body);
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    secure: false, // true for port 465, false for other ports
+    auth: {
+      user: "nijummamun7@gmail.com",
+      pass: "samj ritm fkix daou",
+    },
+  });
+
+  const info = await transporter.sendMail({
+    from: "nijummamun@gmail.com", // sender address
+    to: "roshidmamun2024@gmail.com", // list of receivers
+    subject: req.body.subject, // Subject line
+
+    html: `<b>Name:</b> ${req.body.name} <br/>
+    <b>Email:</b> ${req.body.email} <br/>
+    <b>Message:</b> ${req.body.message}
+    `, // html body
+  });
+
+  console.log("Message sent: %s", info.messageId);
+  res.send({ message: "Email sent" });
+});
+// contact form end here
 
 app.listen(8000);
