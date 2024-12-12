@@ -11,6 +11,7 @@ const Banner = () => {
   const [paragraph, setParagraph] = useState("");
   const [buttonText, setButtonText] = useState("");
   const [buttonShow, setButtonShow] = useState(false);
+  const [image, setImage] = useState("");
 
   useEffect(() => {
     async function fetchData() {
@@ -21,6 +22,7 @@ const Banner = () => {
       setParagraph(data.data.paragraph);
       setButtonText(data.data.buttonText);
       setButtonShow(data.data.buttonShow);
+      setImage(data.data.image);
     }
     fetchData();
   }, []);
@@ -48,11 +50,11 @@ const Banner = () => {
               )}
             </div>
           </div>
-          <div className=" bg-slate-800">
+          <div className=" w-[550px] h-[750px] overflow-hidden">
             <img
-              src={BannerImg}
+              src={`http://localhost:8000/${image}`}
               alt="banner-image"
-              className=" w-full h-full object-cover"
+              className=" w-full h-full"
             />
           </div>
         </div>

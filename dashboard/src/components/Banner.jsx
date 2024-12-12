@@ -8,6 +8,7 @@ const Banner = () => {
   const [buttonText, setButtonText] = useState("");
   const [buttonShow, setButtonShow] = useState(false);
   const [image, setImage] = useState({});
+  const [bannerImage, setBannerImage] = useState("");
   const [id, setId] = useState("");
 
   const handleSubheading = (e) => {
@@ -40,7 +41,7 @@ const Banner = () => {
     data.append("paragraph", paragraph);
     data.append("buttonText", buttonText);
     data.append("buttonShow", buttonShow);
-    data.append("Image", image);
+    data.append("image", image);
     // console.log(data.getAll("subHeading"));
 
     if (id) {
@@ -74,6 +75,7 @@ const Banner = () => {
       setParagraph(data.data.paragraph);
       setButtonText(data.data.buttonText);
       setButtonShow(data.data.buttonShow);
+      setBannerImage(data.data.image);
       setId(data.data._id);
     }
     fetchData();
@@ -94,6 +96,11 @@ const Banner = () => {
             onChange={handleImage}
             type="file"
             className=" rounded-md text-white"
+          />
+          <img
+            width={50}
+            src={`http://localhost:8000/${bannerImage}`}
+            alt="banner"
           />
           <input
             onChange={handleSubheading}

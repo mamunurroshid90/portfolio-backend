@@ -13,9 +13,9 @@ const storage = multer.diskStorage({
     cb(null, "./uploads");
   },
   filename: function (req, file, cb) {
-    console.log(file); // ekhane file er sob kichu pawa jabe
+    console.log(file);
     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(null, uniqueSuffix + "-" + file.originalname); // ekhane originalname dile file er extension soho pawa jabe
+    cb(null, uniqueSuffix + "-" + file.originalname);
   },
 });
 
@@ -57,7 +57,7 @@ app.put("/navbar/:id", function (req, res) {
 // ==================================
 
 // Banner routes start here
-app.post("/banner", upload.single("Image"), function (req, res) {
+app.post("/banner", upload.single("image"), function (req, res) {
   console.log(req.file, "banner");
   let data = new Banner({ ...req.body, image: req.file.path });
   data.save();
@@ -69,7 +69,7 @@ app.get("/banner", async function (req, res) {
   res.send(data);
 });
 
-app.put("/banner/:id", upload.single("Image"), function (req, res) {
+app.put("/banner/:id", upload.single("image"), function (req, res) {
   console.log(req.params.id);
   console.log(req.body);
   Banner.findByIdAndUpdate(req.params.id, {

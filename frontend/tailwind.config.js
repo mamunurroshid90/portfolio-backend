@@ -23,6 +23,7 @@ export default {
         buttonHover: "#FF8B00",
         bgColor: "#FFF5EF",
         textColor: "#606060",
+        borderColor: "#FFE2D1",
       },
     },
   },

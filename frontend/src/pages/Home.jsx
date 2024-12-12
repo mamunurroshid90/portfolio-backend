@@ -3,6 +3,7 @@ import Navbar from "../components/navbar";
 import Banner from "../components/banner";
 import AboutMe from "../components/aboutMe";
 import Services from "../components/services";
+import Contact from "../components/contact";
 
 const Home = () => {
   return (
@@ -15,6 +16,7 @@ const Home = () => {
           </div>
           <AboutMe />
           <Services />
+          <Contact />
         </div>
       </div>
     </>
