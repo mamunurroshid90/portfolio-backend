@@ -7,6 +7,7 @@ const bannerSchema = new Schema({
   paragraph: String,
   buttonText: String,
   buttonShow: Boolean,
+  image: String,
 });
 
 module.exports = mongoose.model("Banner", bannerSchema);

@@ -7,6 +7,7 @@ const Banner = () => {
   const [paragraph, setParagraph] = useState("");
   const [buttonText, setButtonText] = useState("");
   const [buttonShow, setButtonShow] = useState(false);
+  const [image, setImage] = useState({});
   const [id, setId] = useState("");
 
   const handleSubheading = (e) => {
@@ -32,17 +33,19 @@ const Banner = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // console.log(subHeading, heading, paragraph, buttonText, buttonShow, id);
+    console.log(subHeading, heading, paragraph, buttonText, buttonShow, id);
+    let data = new FormData();
+    data.append("subHeading", subHeading);
+    data.append("heading", heading);
+    data.append("paragraph", paragraph);
+    data.append("buttonText", buttonText);
+    data.append("buttonShow", buttonShow);
+    data.append("Image", image);
+    // console.log(data.getAll("subHeading"));
 
     if (id) {
       axios
-        .put("http://localhost:8000/banner/" + id, {
-          subHeading: subHeading,
-          heading: heading,
-          paragraph: paragraph,
-          buttonText: buttonText,
-          buttonShow: buttonShow,
-        })
+        .put("http://localhost:8000/banner/" + id, data)
         .then((res) => {
           console.log(res);
         })
@@ -51,13 +54,7 @@ const Banner = () => {
         });
     } else {
       axios
-        .post("http://localhost:8000/banner", {
-          subHeading: subHeading,
-          heading: heading,
-          paragraph: paragraph,
-          buttonText: buttonText,
-          buttonShow: buttonShow,
-        })
+        .post("http://localhost:8000/banner", data)
         .then((res) => {
           console.log(res);
         })
@@ -82,6 +79,10 @@ const Banner = () => {
     fetchData();
   }, []);
 
+  const handleImage = (e) => {
+    setImage(e.target.files[0]);
+  };
+
   return (
     <>
       <div className=" flex justify-center items-center h-screen">
@@ -89,7 +90,11 @@ const Banner = () => {
           <h2 className=" text-center text-2xl pb-4 border-b-4 border-double font-bold text-white">
             Banner Section
           </h2>
-          <input type="file" className=" rounded-md text-white" />
+          <input
+            onChange={handleImage}
+            type="file"
+            className=" rounded-md text-white"
+          />
           <input
             onChange={handleSubheading}
             value={subHeading}

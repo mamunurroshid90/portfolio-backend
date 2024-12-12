@@ -6,8 +6,24 @@ const Navbar = require("./model/navbarModel");
 const Banner = require("./model/BannerModel");
 const Service = require("./model/serviceModel");
 
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "./uploads");
+  },
+  filename: function (req, file, cb) {
+    console.log(file); // ekhane file er sob kichu pawa jabe
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(null, uniqueSuffix + "-" + file.originalname); // ekhane originalname dile file er extension soho pawa jabe
+  },
+});
+
+const upload = multer({ storage: storage });
+
 app.use(cors());
 app.use(express.json());
+app.use("/uploads", express.static("./uploads"));
 
 mongoose
   .connect(
@@ -41,9 +57,9 @@ app.put("/navbar/:id", function (req, res) {
 // ==================================
 
 // Banner routes start here
-app.post("/banner", function (req, res) {
-  console.log(req.body);
-  let data = new Banner(req.body);
+app.post("/banner", upload.single("Image"), function (req, res) {
+  console.log(req.file, "banner");
+  let data = new Banner({ ...req.body, image: req.file.path });
   data.save();
   res.send({ message: "banner Created" });
 });
@@ -53,11 +69,14 @@ app.get("/banner", async function (req, res) {
   res.send(data);
 });
 
-app.put("/banner/:id", function (req, res) {
+app.put("/banner/:id", upload.single("Image"), function (req, res) {
   console.log(req.params.id);
   console.log(req.body);
-  Banner.findByIdAndUpdate(req.params.id, req.body).then(() => {
-    res.send({ message: "Banner Updated" });
+  Banner.findByIdAndUpdate(req.params.id, {
+    ...req.body,
+    image: req.file.path,
+  }).then(() => {
+    res.send({ message: "Banner Updated try to change" });
   });
 });
 // Banner routes end here
