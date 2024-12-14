@@ -8,6 +8,7 @@ import Footer from "../components/footer";
 import Experience from "../components/experience";
 import Portfolio from "../components/portfolio";
 import Partner from "../components/partner";
+import Blog from "../components/blog";
 
 const Home = () => {
   return (
@@ -21,6 +22,7 @@ const Home = () => {
           <Experience />
           <Portfolio />
           <Partner />
+          <Blog />
           <Contact />
           <Footer />
         </div>
