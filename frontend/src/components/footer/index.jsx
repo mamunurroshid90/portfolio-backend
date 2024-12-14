@@ -10,7 +10,7 @@ import { FiPhoneCall } from "react-icons/fi";
 const Footer = () => {
   return (
     <>
-      <footer>
+      <footer className=" bg-black">
         <div className=" container text-white">
           <div className=" grid grid-cols-4 gap-3 py-[130px] pb-[100px] items-start">
             <div className=" flex flex-col gap-7">
@@ -60,7 +60,7 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-            <div className=" flex flex-col items-start gap-6 ml-12 font-jost">
+            <div className=" flex flex-col items-start gap-6 font-jost">
               <h3 className=" text-xl text-white font-jost font-semibold">
                 Follow me
               </h3>
@@ -111,6 +111,22 @@ const Footer = () => {
                 <p>1-800-915-6270</p>
               </div>
             </div>
+          </div>
+        </div>
+        <hr className=" w-full h-1 bg-[#515151]" />
+        <div className=" container grid grid-cols-[12fr,6fr] text-white py-9">
+          <div className="">
+            <span className=" text-sm font-jost text-white">
+              All rights reserved 2023 Credesign
+            </span>
+          </div>
+          <div className=" flex justify-between items-center">
+            <p className=" text-sm font-jost text-white">
+              <a href="#">Terms & Condition</a>
+            </p>
+            <p className=" text-sm font-jost text-white">
+              <a href="#">Privacy policy</a>
+            </p>
           </div>
         </div>
       </footer>

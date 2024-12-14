@@ -5,22 +5,20 @@ import AboutMe from "../components/aboutMe";
 import Services from "../components/services";
 import Contact from "../components/contact";
 import Footer from "../components/footer";
+import Experience from "../components/experience";
 
 const Home = () => {
   return (
     <>
-      <div className="">
-        <div className=" ">
+      <div>
+        <div>
           <Navbar />
-          <div className=" bg-bgColor">
-            <Banner />
-          </div>
+          <Banner />
           <AboutMe />
           <Services />
+          <Experience />
           <Contact />
-          <div className=" bg-black">
-            <Footer />
-          </div>
+          <Footer />
         </div>
       </div>
     </>

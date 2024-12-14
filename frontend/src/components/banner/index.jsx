@@ -29,33 +29,35 @@ const Banner = () => {
 
   return (
     <>
-      <div className=" container mb-[128px]">
-        <div className=" grid grid-cols-[55fr,45fr] gap-9 items-center">
-          <div className=" ">
-            <div className=" flex items-center gap-1">
-              <img src={RoundIcon} alt="round-icon" />
-              <h4 className=" font-jost">{subHeading}</h4>
+      <div className=" bg-bgColor">
+        <div className=" container mb-[128px]">
+          <div className=" grid grid-cols-[55fr,45fr] gap-9 items-center">
+            <div className=" ">
+              <div className=" flex items-center gap-1">
+                <img src={RoundIcon} alt="round-icon" />
+                <h4 className=" font-jost">{subHeading}</h4>
+              </div>
+              <h1 className=" text-[70px] font-jost font-bold leading-[95px]">
+                {heading}
+              </h1>
+              <p className=" text-lg text-textColor font-jost leading-[30px] mt-11 mb-12">
+                {paragraph}
+              </p>
+              <div>
+                {buttonShow && (
+                  <button className=" bg-buttonColor py-3 px-7 rounded-md text-white font-jost font-semibold hover:bg-buttonHover transition-all duration-100 ease-linear">
+                    {buttonText}
+                  </button>
+                )}
+              </div>
             </div>
-            <h1 className=" text-[70px] font-jost font-bold leading-[95px]">
-              {heading}
-            </h1>
-            <p className=" text-lg text-textColor font-jost leading-[30px] mt-11 mb-12">
-              {paragraph}
-            </p>
-            <div>
-              {buttonShow && (
-                <button className=" bg-buttonColor py-3 px-7 rounded-md text-white font-jost font-semibold hover:bg-buttonHover transition-all duration-100 ease-linear">
-                  {buttonText}
-                </button>
-              )}
+            <div className=" w-[550px] h-[750px] overflow-hidden">
+              <img
+                src={`http://localhost:8000/${image}`}
+                alt="banner-image"
+                className=" w-full h-full"
+              />
             </div>
-          </div>
-          <div className=" w-[550px] h-[750px] overflow-hidden">
-            <img
-              src={`http://localhost:8000/${image}`}
-              alt="banner-image"
-              className=" w-full h-full"
-            />
           </div>
         </div>
       </div>
