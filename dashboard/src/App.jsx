@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import Banner from "./components/Banner";
 import Services from "./components/Services";
 import "react-toastify/dist/ReactToastify.css";
+import About from "./components/About";
 
 function App() {
   const [activeMenu, setActiveMenu] = useState("Navbar");
@@ -93,7 +94,11 @@ function App() {
           <div>
             {activeMenu == "Navbar" && <Navbar />}
             {activeMenu == "Banner" && <Banner />}
-            {activeMenu == "About" && <h1>About</h1>}
+            {activeMenu == "About" && (
+              <h1>
+                <About />
+              </h1>
+            )}
             {activeMenu == "Service" && <Services />}
             {activeMenu == "Resume" && <h1>Resume</h1>}
             {activeMenu == "Portfolio" && <h1>Portfolio</h1>}

@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const Navbar = require("./model/navbarModel");
 const Banner = require("./model/BannerModel");
 const Service = require("./model/serviceModel");
+const About = require("./model/aboutModel");
 const nodemailer = require("nodemailer");
 
 const multer = require("multer");
@@ -81,6 +82,20 @@ app.put("/banner/:id", upload.single("image"), function (req, res) {
   });
 });
 // Banner routes end here
+
+// About routes starts here
+app.post("/about", async function (req, res) {
+  console.log(req.body);
+  let data = new About(req.body);
+  data.save();
+  res.send({ message: "About Created" });
+});
+
+app.get("/about", async function (req, res) {
+  let data = await About.findOne({});
+  res.send(data);
+});
+// About routes ends here
 
 // service routes start here
 app.post("/service", async function (req, res) {
