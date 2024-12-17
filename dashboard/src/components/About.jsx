@@ -95,7 +95,7 @@ const About = () => {
     async function fetchData() {
       console.log("Mamun");
       let data = await axios.get("http://localhost:8000/about");
-      console.log(data.data);
+      console.log(data);
       setSubheading(data.data.subHeading);
       setHeading(data.data.heading);
       setClientDesign(data.data.clientDesign);
@@ -123,7 +123,7 @@ const About = () => {
           <img
             width={50}
             // src={`http://localhost:8000/${bannerImage}`}
-            alt="banner"
+            alt="About"
           />
           <input
             onChange={handleSubheading}

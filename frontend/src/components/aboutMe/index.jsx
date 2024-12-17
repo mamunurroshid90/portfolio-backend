@@ -1,10 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AboutMeImg from "../../assets/images/aboutMeImage.jpg";
 import CheckIcon from "../../assets/images/check-square.png";
 import RoundIcon from "../../assets/images/round-icon.png";
 import CompProjectIcon from "../../assets/images/compProjIcon.png";
+import axios from "axios";
 
 const AboutMe = () => {
+  const [subHeading, setSubheading] = useState("");
+  const [heading, setHeading] = useState("");
+  const [clientDesign, setClientDesign] = useState("");
+  const [friendlyDesign, setFriendlyDesign] = useState("");
+  const [paragraph, setParagraph] = useState("");
+  const [buttonText, setButtonText] = useState("");
+  const [buttonShow, setButtonShow] = useState(false);
+
+  useEffect(() => {
+    async function fetchData() {
+      let data = await axios.get("http://localhost:8000/about");
+      console.log(data.data);
+      setSubheading(data.data.subHeading);
+      setHeading(data.data.heading);
+      setClientDesign(data.data.clientDesign);
+      setFriendlyDesign(data.data.friendlyDesign);
+      setParagraph(data.data.paragraph);
+      setButtonText(data.data.buttonText);
+      setButtonShow(data.data.buttonShow);
+    }
+    fetchData();
+  }, []);
   return (
     <>
       <div className=" container">
@@ -19,17 +42,13 @@ const AboutMe = () => {
           <div className="">
             <div className=" flex items-center gap-1">
               <img src={RoundIcon} alt="round icon" />
-              <h4 className=" font-jost text-lg">About Me</h4>
+              <h4 className=" font-jost text-lg">{subHeading}</h4>
             </div>
             <h2 className=" text-[58px] font-jost font-bold leading-[70px]">
-              I Can Design Anything You Want
+              {heading}
             </h2>
             <p className=" text-lg text-textColor font-jost leading-[30px] my-8">
-              Nam libero tempore, cum soluta nobis est eligendi optio cumque
-              nihil impedit quo minus id quod maxime placeat facere possimus,
-              omnis voluptas assumenda est, omnis dolor repellendus. Temporibus
-              autem quibusdam et aut officiis. Nam libero tempore, cum soluta
-              nobis est eligendi optio cumque nihil impedit.
+              {paragraph}
             </p>
             <div className=" flex items-center gap-[30px]">
               <div className=" flex items-center gap-3">
@@ -62,21 +81,19 @@ const AboutMe = () => {
             <div className=" my-9 flex flex-col gap-5">
               <div className=" flex items-center gap-3">
                 <img src={CheckIcon} alt="check icon" />
-                <h5 className=" text-base font-alef">
-                  Work simple and cline design
-                </h5>
+                <h5 className=" text-base font-alef">{clientDesign}</h5>
               </div>
               <div className=" flex items-center gap-3">
                 <img src={CheckIcon} alt="check icon" />
-                <h5 className=" text-base font-alef">
-                  New idea and user friendly design
-                </h5>
+                <h5 className=" text-base font-alef">{friendlyDesign}</h5>
               </div>
             </div>
             <div>
-              <button className=" bg-buttonColor py-3 px-7 rounded-md text-white font-jost font-semibold hover:bg-buttonHover transition-all duration-100 ease-linear">
-                Download My CV
-              </button>
+              {buttonShow && (
+                <button className=" bg-buttonColor py-3 px-7 rounded-md text-white font-jost font-semibold hover:bg-buttonHover transition-all duration-100 ease-linear">
+                  {buttonText}
+                </button>
+              )}
             </div>
           </div>
         </div>
