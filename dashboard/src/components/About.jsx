@@ -9,7 +9,8 @@ const About = () => {
   const [paragraph, setParagraph] = useState("");
   const [buttonText, setButtonText] = useState("");
   const [buttonShow, setButtonShow] = useState(false);
-  const [image, setImage] = useState({});
+  // const [image, setImage] = useState({});
+  const [id, setId] = useState("");
 
   const handleSubheading = (e) => {
     setSubheading(e.target.value);
@@ -50,31 +51,59 @@ const About = () => {
       buttonText,
       buttonShow
     );
-    let data = new FormData();
-    data.append("subHeading", subHeading);
-    data.append("heading", heading);
-    data.append("clientDesign", clientDesign);
-    data.append("friendlyDesign", friendlyDesign);
-    data.append("paragraph", paragraph);
-    data.append("buttonText", buttonText);
-    data.append("buttonShow", buttonShow);
-    data.append("image", image);
-    console.log(data.get("heading"));
 
-    axios
-      .post("http://localhost:8000/about", data)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (id) {
+      axios
+        .put("http://localhost:8000/about/" + id, {
+          subHeading: subHeading,
+          heading: heading,
+          clientDesign: clientDesign,
+          friendlyDesign: friendlyDesign,
+          paragraph: paragraph,
+          buttonText: buttonText,
+          buttonShow: buttonShow,
+          // image: image,
+        })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      axios
+        .post("http://localhost:8000/about", {
+          subHeading: subHeading,
+          heading: heading,
+          clientDesign: clientDesign,
+          friendlyDesign: friendlyDesign,
+          paragraph: paragraph,
+          buttonText: buttonText,
+          buttonShow: buttonShow,
+          // image: image,
+        })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   useEffect(() => {
     async function fetchData() {
-      let data = axios.get("http://localhost:8000/about");
-      console.log(data);
+      console.log("Mamun");
+      let data = await axios.get("http://localhost:8000/about");
+      console.log(data.data);
+      setSubheading(data.data.subHeading);
+      setHeading(data.data.heading);
+      setClientDesign(data.data.clientDesign);
+      setFriendlyDesign(data.data.friendlyDesign);
+      setParagraph(data.data.paragraph);
+      setButtonText(data.data.buttonText);
+      setButtonShow(data.data.buttonShow);
+      setId(data.data._id);
     }
     fetchData();
   }, []);
@@ -98,30 +127,35 @@ const About = () => {
           />
           <input
             onChange={handleSubheading}
+            value={subHeading}
             type="text"
             className=" p-2 rounded-md"
             placeholder="Subheading"
           />
           <input
             onChange={handleHeading}
+            value={heading}
             type="text"
             className=" p-2 rounded-md"
             placeholder="Heading"
           />
           <input
             onChange={handleClientDesign}
+            value={clientDesign}
             type="text"
             placeholder=" client design"
             className=" p-2 rounded-md"
           />
           <input
             onChange={handleFriendlyDesign}
+            value={friendlyDesign}
             type="text"
             placeholder=" friendly design"
             className=" p-2 rounded-md"
           />
           <textarea
             onChange={handleParagraph}
+            value={paragraph}
             name=""
             id=""
             placeholder="Paragraph"
@@ -130,6 +164,7 @@ const About = () => {
           ></textarea>
           <input
             onChange={handleButtonText}
+            value={buttonText}
             type="text"
             placeholder="Button Text"
             className=" p-2 rounded-md"

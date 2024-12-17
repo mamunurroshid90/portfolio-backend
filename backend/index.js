@@ -84,16 +84,24 @@ app.put("/banner/:id", upload.single("image"), function (req, res) {
 // Banner routes end here
 
 // About routes starts here
-app.post("/about", async function (req, res) {
+app.post("/about", function (req, res) {
   console.log(req.body);
   let data = new About(req.body);
   data.save();
-  res.send({ message: "About Created" });
+  res.send({ message: "About Data sent" });
 });
 
 app.get("/about", async function (req, res) {
   let data = await About.findOne({});
   res.send(data);
+});
+
+app.put("/about/:id", function (req, res) {
+  console.log(req.body);
+  console.log(req.params.id);
+  About.findByIdAndUpdate(req.params.id, req.body).then(() => {
+    res.send({ message: "About Updated" });
+  });
 });
 // About routes ends here
 
