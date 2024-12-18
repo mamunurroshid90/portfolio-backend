@@ -13,6 +13,10 @@ const AboutMe = () => {
   const [paragraph, setParagraph] = useState("");
   const [buttonText, setButtonText] = useState("");
   const [buttonShow, setButtonShow] = useState(false);
+  const [projectText, setProjectText] = useState("");
+  const [projectCount, setProjectCount] = useState("");
+  const [experienceYearText, setExperienceYearText] = useState("");
+  const [experienceYearCount, setExperienceYearCount] = useState("");
 
   useEffect(() => {
     async function fetchData() {
@@ -25,6 +29,10 @@ const AboutMe = () => {
       setParagraph(data.data.paragraph);
       setButtonText(data.data.buttonText);
       setButtonShow(data.data.buttonShow);
+      setProjectText(data.data.projectText);
+      setProjectCount(data.data.projectCount);
+      setExperienceYearText(data.data.experienceYearText);
+      setExperienceYearCount(data.data.experienceYearCount);
     }
     fetchData();
   }, []);
@@ -57,10 +65,10 @@ const AboutMe = () => {
                 </div>
                 <div>
                   <h2 className=" font-sans text-[21px] font-bold text-[#FF6B00]">
-                    350+
+                    {projectCount}+
                   </h2>
                   <h3 className=" text-[20px] text-[#101010] font-jost">
-                    Complete Project
+                    {projectText}
                   </h3>
                 </div>
               </div>
@@ -70,10 +78,10 @@ const AboutMe = () => {
                 </div>
                 <div>
                   <h2 className=" font-sans text-[21px] font-bold text-[#FF6B00]">
-                    16+
+                    {experienceYearCount}+
                   </h2>
                   <h3 className=" text-[20px] text-[#101010] font-jost">
-                    Year of experience
+                    {experienceYearText}
                   </h3>
                 </div>
               </div>

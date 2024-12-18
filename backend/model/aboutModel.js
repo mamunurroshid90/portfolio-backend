@@ -9,6 +9,10 @@ const aboutSchema = new Schema({
   paragraph: String,
   buttonText: String,
   buttonShow: Boolean,
+  projectText: String,
+  projectCount: String,
+  experienceYearText: String,
+  experienceYearCount: String,
   image: String,
 });
 

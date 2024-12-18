@@ -9,6 +9,10 @@ const About = () => {
   const [paragraph, setParagraph] = useState("");
   const [buttonText, setButtonText] = useState("");
   const [buttonShow, setButtonShow] = useState(false);
+  const [projectText, setProjectText] = useState("");
+  const [projectCount, setProjectCount] = useState("");
+  const [experienceYearText, setExperienceYearText] = useState("");
+  const [experienceYearCount, setExperienceYearCount] = useState("");
   // const [image, setImage] = useState({});
   const [id, setId] = useState("");
 
@@ -40,6 +44,19 @@ const About = () => {
     setButtonShow(e.target.checked);
   };
 
+  const handleProjectText = (e) => {
+    setProjectText(e.target.value);
+  };
+  const handleProjectTotal = (e) => {
+    setProjectCount(e.target.value);
+  };
+  const yearExperienceText = (e) => {
+    setExperienceYearText(e.target.value);
+  };
+  const yearExperienceTotal = (e) => {
+    setExperienceYearCount(e.target.value);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(
@@ -62,6 +79,10 @@ const About = () => {
           paragraph: paragraph,
           buttonText: buttonText,
           buttonShow: buttonShow,
+          projectText: projectText,
+          projectCount: projectCount,
+          experienceYearText: experienceYearText,
+          experienceYearCount: experienceYearCount,
           // image: image,
         })
         .then((res) => {
@@ -80,6 +101,10 @@ const About = () => {
           paragraph: paragraph,
           buttonText: buttonText,
           buttonShow: buttonShow,
+          projectText: projectText,
+          projectCount: projectCount,
+          experienceYearText: experienceYearText,
+          experienceYearCount: experienceYearCount,
           // image: image,
         })
         .then((res) => {
@@ -103,6 +128,10 @@ const About = () => {
       setParagraph(data.data.paragraph);
       setButtonText(data.data.buttonText);
       setButtonShow(data.data.buttonShow);
+      setProjectText(data.data.projectText);
+      setProjectCount(data.data.projectCount);
+      setExperienceYearText(data.data.experienceYearText);
+      setExperienceYearCount(data.data.experienceYearCount);
       setId(data.data._id);
     }
     fetchData();
@@ -139,6 +168,35 @@ const About = () => {
             className=" p-2 rounded-md"
             placeholder="Heading"
           />
+          <input
+            onChange={handleProjectText}
+            value={projectText}
+            type="text"
+            placeholder="complete project text"
+            className=" p-2 rounded-md"
+          />
+          <input
+            value={projectCount}
+            onChange={handleProjectTotal}
+            type="text"
+            placeholder="complete project total"
+            className=" p-2 rounded-md"
+          />
+          <input
+            onChange={yearExperienceText}
+            value={experienceYearText}
+            type="text"
+            placeholder="year of experience text"
+            className=" p-2 rounded-md"
+          />
+          <input
+            onChange={yearExperienceTotal}
+            value={experienceYearCount}
+            type="text"
+            placeholder="year of experience total"
+            className=" p-2 rounded-md"
+          />
+
           <input
             onChange={handleClientDesign}
             value={clientDesign}
