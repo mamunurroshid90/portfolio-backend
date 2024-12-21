@@ -4,6 +4,7 @@ import Banner from "./components/Banner";
 import Services from "./components/Services";
 import "react-toastify/dist/ReactToastify.css";
 import About from "./components/About";
+import Resume from "./components/Resume";
 
 function App() {
   const [activeMenu, setActiveMenu] = useState("Navbar");
@@ -100,7 +101,7 @@ function App() {
               </h1>
             )}
             {activeMenu == "Service" && <Services />}
-            {activeMenu == "Resume" && <h1>Resume</h1>}
+            {activeMenu == "Resume" && <Resume />}
             {activeMenu == "Portfolio" && <h1>Portfolio</h1>}
             {activeMenu == "Testimonial" && <h1>Testimonial</h1>}
             {activeMenu == "Partner" && <h1>Partner</h1>}
