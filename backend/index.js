@@ -6,6 +6,7 @@ const Navbar = require("./model/navbarModel");
 const Banner = require("./model/BannerModel");
 const Service = require("./model/serviceModel");
 const About = require("./model/aboutModel");
+const Resume = require("./model/resumeModel");
 const nodemailer = require("nodemailer");
 
 const multer = require("multer");
@@ -131,6 +132,20 @@ app.put("/service/:id", function (req, res) {
   });
 });
 // service routes end here
+
+// Resume routes starts here
+app.post("/resume", function (req, res) {
+  console.log(req.body);
+  let data = new Resume(req.body);
+  data.save();
+  res.send({ message: "Resume Update" });
+});
+
+app.get("/resume", async function (req, res) {
+  let data = await Resume.find({});
+  res.send(data);
+});
+// Resume routes ends here
 
 // contact form start here
 app.post("/email", async function (req, res) {

@@ -1,6 +1,50 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 const Resume = () => {
+  const [sectionTitle, setSectionTitle] = useState("");
+  const [title, setTitle] = useState("");
+  const [subTitle, setSubTitle] = useState("");
+  const [paragraph, setParagraph] = useState("");
+  const [list, setList] = useState([]);
+
+  const handleSectionTitle = (e) => {
+    setSectionTitle(e.target.value);
+  };
+  const handleTitle = (e) => {
+    setTitle(e.target.value);
+  };
+  const handleSubTitle = (e) => {
+    setSubTitle(e.target.value);
+  };
+  const handleParagraph = (e) => {
+    setParagraph(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(sectionTitle, title, subTitle, paragraph);
+    axios
+      .post("http://localhost:8000/resume", {
+        sectionTitle: sectionTitle,
+        title: title,
+        subTitle: subTitle,
+        paragraph: paragraph,
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    axios.get("http://localhost:8000/resume").then((res) => {
+      setList(res.data);
+    });
+  }, []);
+
   return (
     <>
       <div className=" flex flex-col justify-center items-center pt-5">
@@ -11,27 +55,36 @@ const Resume = () => {
           <input type="file" name="" id="" />
           <input
             type="text"
+            onChange={handleSectionTitle}
+            value={sectionTitle}
             placeholder="Section Title"
             className=" p-2 rounded-md w-full"
           />
           <input
             type="text"
+            onChange={handleTitle}
+            value={title}
             placeholder="Title"
             className=" p-2 rounded-md w-full"
           />
           <input
             type="text"
+            onChange={handleSubTitle}
+            value={subTitle}
             placeholder="subTitle"
             className=" p-2 rounded-md w-full"
           />
           <input
             type="text"
+            onChange={handleParagraph}
+            value={paragraph}
             placeholder="Paragraph"
             className=" p-2 rounded-md w-full"
           />
           <div>
             <button
               type="submit"
+              onClick={handleSubmit}
               className=" bg-slate-500 text-white font-medium rounded-md p-2 w-full"
             >
               Submit
@@ -56,48 +109,30 @@ const Resume = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr className=" bg-slate-600 text-white">
-                  <td className=" border border-slate-300 p-2">1</td>
-                  <td className=" border border-slate-300 p-2 font-bold">
-                    BSc in Computer Science
-                  </td>
-                  <td className=" border border-slate-300 p-2">
-                    University of ULAV (2018 - 2022)
-                  </td>
-                  <td className=" border border-slate-300 p-2">
-                    Hen our power of choice is untrammelled and when nothing
-                    prevents our being able
-                  </td>
-                  <td className=" flex flex-wrap gap-2 justify-center border-t p-2">
-                    <button className=" bg-green-700 px-2 font-semibold  rounded-md text-white">
-                      Edit
-                    </button>
-                    <button className=" bg-red-700 px-2 font-semibold  rounded-md text-white">
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-                <tr className=" bg-slate-600 text-white">
-                  <td className=" border border-slate-300 p-2">1</td>
-                  <td className=" border border-slate-300 p-2 font-bold">
-                    BSc in Computer Science
-                  </td>
-                  <td className=" border border-slate-300 p-2">
-                    University of ULAV (2018 - 2022)
-                  </td>
-                  <td className=" border border-slate-300 p-2">
-                    Hen our power of choice is untrammelled and when nothing
-                    prevents our being able
-                  </td>
-                  <td className=" flex flex-wrap gap-2 justify-center border-t p-2">
-                    <button className=" bg-green-700 px-2 font-semibold  rounded-md text-white">
-                      Edit
-                    </button>
-                    <button className=" bg-red-700 px-2 font-semibold  rounded-md text-white">
-                      Delete
-                    </button>
-                  </td>
-                </tr>
+                {list.map((item, index) => (
+                  <tr key={index} className=" bg-slate-600 text-white">
+                    <td className=" border border-slate-300 p-2">
+                      {index + 1}
+                    </td>
+                    <td className=" border border-slate-300 p-2 font-bold">
+                      {item.title}
+                    </td>
+                    <td className=" border border-slate-300 p-2">
+                      {item.subTitle}
+                    </td>
+                    <td className=" border border-slate-300 p-2">
+                      {item.paragraph}
+                    </td>
+                    <td className=" flex flex-wrap gap-2 justify-center border-t p-2">
+                      <button className=" bg-green-700 px-2 font-semibold  rounded-md text-white">
+                        Edit
+                      </button>
+                      <button className=" bg-red-700 px-2 font-semibold  rounded-md text-white">
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>

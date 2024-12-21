@@ -1,7 +1,23 @@
 import React from "react";
 import RoundedIcon from "../../assets/images/round-icon.png";
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
 
 const Experience = () => {
+  const [list, setList] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/resume")
+      .then((res) => {
+        setList(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <>
       <div className=" bg-bgColor">
@@ -21,42 +37,19 @@ const Experience = () => {
                 Education
               </h3>
               <div className=" flex flex-wrap gap-5">
-                <div className=" w-[380px] bg-white rounded-md py-7 pr-7 pl-10">
-                  <h3 className=" text-xl font-semibold font-jost text-[#000000]">
-                    BSc in Computer Science
-                  </h3>
-                  <p className=" text-base text-textColor font-jost mt-2 mb-4">
-                    University of ULAV (2018 - 2022)
-                  </p>
-                  <p className=" text-base text-textColor font-jost">
-                    Hen our power of choice is untrammelled and when nothing
-                    prevents our being able
-                  </p>
-                </div>
-                <div className=" w-[380px] bg-white rounded-md py-7 pr-7 pl-10">
-                  <h3 className=" text-xl font-semibold font-jost text-[#000000]">
-                    BSc in Computer Science
-                  </h3>
-                  <p className=" text-base text-textColor font-jost mt-2 mb-4">
-                    University of ULAV (2018 - 2022)
-                  </p>
-                  <p className=" text-base text-textColor font-jost">
-                    Hen our power of choice is untrammelled and when nothing
-                    prevents our being able
-                  </p>
-                </div>
-                <div className=" w-[380px] bg-white rounded-md py-7 pr-7 pl-10">
-                  <h3 className=" text-xl font-semibold font-jost text-[#000000]">
-                    BSc in Computer Science
-                  </h3>
-                  <p className=" text-base text-textColor font-jost mt-2 mb-4">
-                    University of ULAV (2018 - 2022)
-                  </p>
-                  <p className=" text-base text-textColor font-jost">
-                    Hen our power of choice is untrammelled and when nothing
-                    prevents our being able
-                  </p>
-                </div>
+                {list.map((item) => (
+                  <div className=" w-[380px] bg-white rounded-md py-7 pr-7 pl-10">
+                    <h3 className=" text-xl font-semibold font-jost text-[#000000]">
+                      {item.title}
+                    </h3>
+                    <p className=" text-base text-textColor font-jost mt-2 mb-4">
+                      {item.subTitle}
+                    </p>
+                    <p className=" text-base text-textColor font-jost">
+                      {item.paragraph}
+                    </p>
+                  </div>
+                ))}
               </div>
             </div>
             <div>
