@@ -145,6 +145,17 @@ app.get("/resume", async function (req, res) {
   let data = await Resume.find({});
   res.send(data);
 });
+
+app.delete("/resume/:id", async function (req, res) {
+  let data = await Resume.findByIdAndDelete(req.params.id);
+  res.send({ message: "Resume Deleted" });
+});
+
+app.put("/resume/:id", function (req, res) {
+  Resume.findByIdAndUpdate(req.params.id, req.body).then(() => {
+    res.send({ message: "Resume Updated" });
+  });
+});
 // Resume routes ends here
 
 // contact form start here
