@@ -17,6 +17,7 @@ const AboutMe = () => {
   const [projectCount, setProjectCount] = useState("");
   const [experienceYearText, setExperienceYearText] = useState("");
   const [experienceYearCount, setExperienceYearCount] = useState("");
+  const [image, setImage] = useState("");
 
   useEffect(() => {
     async function fetchData() {
@@ -33,6 +34,7 @@ const AboutMe = () => {
       setProjectCount(data.data.projectCount);
       setExperienceYearText(data.data.experienceYearText);
       setExperienceYearCount(data.data.experienceYearCount);
+      setImage(data.data.image);
     }
     fetchData();
   }, []);
@@ -42,7 +44,7 @@ const AboutMe = () => {
         <div className=" grid grid-cols-[45fr,55fr] gap-[112px] items-center">
           <div className=" h-[770px]">
             <img
-              src={AboutMeImg}
+              src={`http://localhost:8000/${image}`}
               alt="aboutMe-img"
               className=" w-full h-full object-cover rounded-md"
             />

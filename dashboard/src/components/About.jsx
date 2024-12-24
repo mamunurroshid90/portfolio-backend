@@ -13,7 +13,8 @@ const About = () => {
   const [projectCount, setProjectCount] = useState("");
   const [experienceYearText, setExperienceYearText] = useState("");
   const [experienceYearCount, setExperienceYearCount] = useState("");
-  // const [image, setImage] = useState({});
+  const [image, setImage] = useState({});
+  const [AboutImage, setAboutImage] = useState("");
   const [id, setId] = useState("");
 
   const handleSubheading = (e) => {
@@ -66,25 +67,30 @@ const About = () => {
       friendlyDesign,
       paragraph,
       buttonText,
-      buttonShow
+      buttonShow,
+      image,
+      id
     );
+
+    let data = new FormData();
+    console.log(data);
+    data.append("subHeading", subHeading);
+    data.append("heading", heading);
+    data.append("clientDesign", clientDesign);
+    data.append("friendlyDesign", friendlyDesign);
+    data.append("paragraph", paragraph);
+    data.append("buttonText", buttonText);
+    data.append("buttonShow", buttonShow);
+    data.append("projectText", projectText);
+    data.append("projectCount", projectCount);
+    data.append("experienceYearText", experienceYearText);
+    data.append("experienceYearCount", experienceYearCount);
+    data.append("image", image);
+    console.log(data.getAll("subHeading"));
 
     if (id) {
       axios
-        .put("http://localhost:8000/about/" + id, {
-          subHeading: subHeading,
-          heading: heading,
-          clientDesign: clientDesign,
-          friendlyDesign: friendlyDesign,
-          paragraph: paragraph,
-          buttonText: buttonText,
-          buttonShow: buttonShow,
-          projectText: projectText,
-          projectCount: projectCount,
-          experienceYearText: experienceYearText,
-          experienceYearCount: experienceYearCount,
-          // image: image,
-        })
+        .put("http://localhost:8000/about/" + id, data)
         .then((res) => {
           console.log(res);
         })
@@ -93,20 +99,7 @@ const About = () => {
         });
     } else {
       axios
-        .post("http://localhost:8000/about", {
-          subHeading: subHeading,
-          heading: heading,
-          clientDesign: clientDesign,
-          friendlyDesign: friendlyDesign,
-          paragraph: paragraph,
-          buttonText: buttonText,
-          buttonShow: buttonShow,
-          projectText: projectText,
-          projectCount: projectCount,
-          experienceYearText: experienceYearText,
-          experienceYearCount: experienceYearCount,
-          // image: image,
-        })
+        .post("http://localhost:8000/about", data)
         .then((res) => {
           console.log(res);
         })
@@ -132,28 +125,35 @@ const About = () => {
       setProjectCount(data.data.projectCount);
       setExperienceYearText(data.data.experienceYearText);
       setExperienceYearCount(data.data.experienceYearCount);
+      setAboutImage(data.data.image);
+
       setId(data.data._id);
     }
     fetchData();
   }, []);
 
+  const handleImage = (e) => {
+    setImage(e.target.files[0]);
+  };
+
   return (
     <>
-      <div className=" flex justify-center items-center h-screen">
+      <div className=" flex justify-center items-center">
         <form className=" flex flex-col gap-4 bg-slate-700 p-6 rounded-md w-[600px]">
           <h2 className=" text-center text-2xl pb-4 border-b-4 border-double font-bold text-white">
             About Section
           </h2>
+          <img
+            width={50}
+            src={`http://localhost:8000/${AboutImage}`}
+            alt="about"
+          />
           <input
-            // onChange={handleImage}
+            onChange={handleImage}
             type="file"
             className=" rounded-md text-white"
           />
-          <img
-            width={50}
-            // src={`http://localhost:8000/${bannerImage}`}
-            alt="About"
-          />
+
           <input
             onChange={handleSubheading}
             value={subHeading}

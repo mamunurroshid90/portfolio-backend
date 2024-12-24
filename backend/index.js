@@ -85,9 +85,9 @@ app.put("/banner/:id", upload.single("image"), function (req, res) {
 // Banner routes end here
 
 // About routes starts here
-app.post("/about", function (req, res) {
-  console.log(req.body);
-  let data = new About(req.body);
+app.post("/about", upload.single("image"), function (req, res) {
+  console.log(req.file, "about");
+  let data = new About({ ...req.body, image: req.file.path });
   data.save();
   res.send({ message: "About Data sent" });
 });
@@ -97,10 +97,13 @@ app.get("/about", async function (req, res) {
   res.send(data);
 });
 
-app.put("/about/:id", function (req, res) {
+app.put("/about/:id", upload.single("image"), function (req, res) {
   console.log(req.body);
   console.log(req.params.id);
-  About.findByIdAndUpdate(req.params.id, req.body).then(() => {
+  About.findByIdAndUpdate(req.params.id, {
+    ...req.body,
+    image: req.file.path,
+  }).then(() => {
     res.send({ message: "About Updated" });
   });
 });
