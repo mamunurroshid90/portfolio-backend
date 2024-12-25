@@ -16,6 +16,7 @@ const About = () => {
   const [experienceYearCount, setExperienceYearCount] = useState("");
   const [aboutImg, setAboutImg] = useState({});
   const [compProjectImg, setCompProjImg] = useState("");
+  const [experienceImg, setExperienceImg] = useState("");
   const [id, setId] = useState("");
 
   const handleSubheading = (e) => {
@@ -88,6 +89,7 @@ const About = () => {
     data.append("experienceYearCount", experienceYearCount);
     data.append("about", aboutImg);
     data.append("completeImg", compProjectImg);
+    data.append("experienceImg", experienceImg);
     console.log(data.getAll("subHeading"));
 
     if (id) {
@@ -141,6 +143,10 @@ const About = () => {
     setCompProjImg(e.target.files[0]);
   };
 
+  const handleExperienceYear = (e) => {
+    setExperienceImg(e.target.files[0]);
+  };
+
   return (
     <>
       <div className=" flex justify-center items-center">
@@ -161,7 +167,7 @@ const About = () => {
           <img
             width={50}
             src={`http://localhost:8000/${aboutInfo.experienceImg}`}
-            alt="completeProject"
+            alt="experienceYear"
           />
           <input
             onChange={handleImage}
@@ -202,6 +208,12 @@ const About = () => {
             type="text"
             placeholder="complete project total"
             className=" p-2 rounded-md"
+          />
+          <input
+            onChange={handleExperienceYear}
+            type="file"
+            name="completeProject"
+            id=""
           />
           <input
             onChange={yearExperienceText}

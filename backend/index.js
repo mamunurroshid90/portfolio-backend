@@ -84,12 +84,13 @@ app.put("/banner/:id", upload.single("image"), function (req, res) {
 });
 // Banner routes end here
 
+// About routes starts here
 const cpUpload = upload.fields([
   { name: "about", maxCount: 1 },
   { name: "completeImg", maxCount: 1 },
   { name: "experienceImg", maxCount: 1 },
 ]);
-// About routes starts here
+
 app.post("/about", cpUpload, function (req, res) {
   console.log(req.file, "about");
   let data = new About({ ...req.body, image: req.file.path });

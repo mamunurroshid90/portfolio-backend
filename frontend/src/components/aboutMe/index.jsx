@@ -18,8 +18,13 @@ const AboutMe = () => {
   const [projectCount, setProjectCount] = useState("");
   const [experienceYearText, setExperienceYearText] = useState("");
   const [experienceYearCount, setExperienceYearCount] = useState("");
-  const [image, setImage] = useState("");
+  // const [image, setImage] = useState("");
+  const [aboutInfo, setAboutInfo] = useState({});
+  const [compProjectImg, setCompProjImg] = useState("");
+  const [experienceImg, setExperienceImg] = useState("");
 
+  console.log(aboutInfo);
+  console.log();
   useEffect(() => {
     async function fetchData() {
       let data = await axios.get("http://localhost:8000/about");
@@ -35,7 +40,11 @@ const AboutMe = () => {
       setProjectCount(data.data.projectCount);
       setExperienceYearText(data.data.experienceYearText);
       setExperienceYearCount(data.data.experienceYearCount);
-      setImage(data.data.image);
+      // setImage(data.data.image);
+      setAboutInfo(data.data.aboutImg);
+
+      setCompProjImg(data.data.completeImg);
+      setExperienceImg(data.data.experienceImg);
     }
     fetchData();
   }, []);
@@ -45,7 +54,7 @@ const AboutMe = () => {
         <div className=" grid grid-cols-[45fr,55fr] gap-[112px] items-center">
           <div className=" h-[770px]">
             <img
-              src={`http://localhost:8000/${image}`}
+              src={`http://localhost:8000/${aboutInfo}`}
               alt="aboutMe-img"
               className=" w-full h-full object-cover rounded-md"
             />
@@ -64,7 +73,10 @@ const AboutMe = () => {
             <div className=" flex items-center gap-[30px]">
               <div className=" flex items-center gap-3">
                 <div className=" w-[60px] h-[58px] rounded-md bg-bgColor flex justify-center items-center">
-                  <img src={CompProjectIcon} alt="complProjectIcon" />
+                  <img
+                    src={`http://localhost:8000/${compProjectImg}`}
+                    alt="complProjectIcon"
+                  />
                 </div>
                 <div>
                   <h2 className=" font-sans text-[21px] font-bold text-[#FF6B00]">
@@ -77,7 +89,10 @@ const AboutMe = () => {
               </div>
               <div className=" flex items-center gap-3">
                 <div className=" w-[60px] h-[58px] rounded-md bg-bgColor flex justify-center items-center">
-                  <img src={ExperienceIcon} alt="complProjectIcon" />
+                  <img
+                    src={`http://localhost:8000/${experienceImg}`}
+                    alt="complProjectIcon"
+                  />
                 </div>
                 <div>
                   <h2 className=" font-sans text-[21px] font-bold text-[#FF6B00]">
