@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
-import AboutMeImg from "../../assets/images/aboutMeImage.jpg";
-import CheckIcon from "../../assets/images/check-square.png";
-import RoundIcon from "../../assets/images/round-icon.png";
-import CompProjectIcon from "../../assets/images/compProjIcon.png";
-import ExperienceIcon from "../../assets/images/experienceIcon.png";
+import { IoMdCheckboxOutline } from "react-icons/io";
+import { GrEmptyCircle } from "react-icons/gr";
 import axios from "axios";
 
 const AboutMe = () => {
@@ -18,7 +15,6 @@ const AboutMe = () => {
   const [projectCount, setProjectCount] = useState("");
   const [experienceYearText, setExperienceYearText] = useState("");
   const [experienceYearCount, setExperienceYearCount] = useState("");
-  // const [image, setImage] = useState("");
   const [aboutInfo, setAboutInfo] = useState({});
   const [compProjectImg, setCompProjImg] = useState("");
   const [experienceImg, setExperienceImg] = useState("");
@@ -40,9 +36,7 @@ const AboutMe = () => {
       setProjectCount(data.data.projectCount);
       setExperienceYearText(data.data.experienceYearText);
       setExperienceYearCount(data.data.experienceYearCount);
-      // setImage(data.data.image);
       setAboutInfo(data.data.aboutImg);
-
       setCompProjImg(data.data.completeImg);
       setExperienceImg(data.data.experienceImg);
     }
@@ -61,7 +55,7 @@ const AboutMe = () => {
           </div>
           <div className="">
             <div className=" flex items-center gap-1">
-              <img src={RoundIcon} alt="round icon" />
+              <GrEmptyCircle className=" text-xl" />
               <h4 className=" font-jost text-lg">{subHeading}</h4>
             </div>
             <h2 className=" text-[58px] font-jost font-bold leading-[70px]">
@@ -106,11 +100,11 @@ const AboutMe = () => {
             </div>
             <div className=" my-9 flex flex-col gap-5">
               <div className=" flex items-center gap-3">
-                <img src={CheckIcon} alt="check icon" />
+                <IoMdCheckboxOutline className=" text-buttonColor" />
                 <h5 className=" text-base font-alef">{clientDesign}</h5>
               </div>
               <div className=" flex items-center gap-3">
-                <img src={CheckIcon} alt="check icon" />
+                <IoMdCheckboxOutline className=" text-buttonColor" />
                 <h5 className=" text-base font-alef">{friendlyDesign}</h5>
               </div>
             </div>
