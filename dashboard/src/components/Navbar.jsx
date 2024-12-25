@@ -1,12 +1,13 @@
 import React from "react";
 import axios from "axios";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const Navbar = () => {
   const [menuItem, setMenuItem] = useState("");
   const [buttonText, setButtonText] = useState("");
   const [buttonShow, setButtonShow] = useState(false);
+  const [image, setImage] = useState({});
+  const [logo, setLogo] = useState("");
   const [id, setId] = useState("");
 
   const handleSubmit = (e) => {
@@ -14,13 +15,19 @@ const Navbar = () => {
 
     console.log(menuItem, buttonText, buttonShow);
 
+    let data = new FormData();
+    console.log(data);
+
+    data.append("menuItem", menuItem);
+    data.append("buttonText", buttonText);
+    data.append("buttonShow", buttonShow);
+    data.append("image", image);
+
+    console.log(data.data);
+
     if (id) {
       axios
-        .put("http://localhost:8000/navbar/" + id, {
-          menuItem: menuItem,
-          buttonText: buttonText,
-          buttonShow: buttonShow,
-        })
+        .put("http://localhost:8000/navbar/" + id, data)
         .then((res) => {
           console.log(res);
         })
@@ -29,11 +36,7 @@ const Navbar = () => {
         });
     } else {
       axios
-        .post("http://localhost:8000/navbar", {
-          menuItem: menuItem,
-          buttonText: buttonText,
-          buttonShow: buttonShow,
-        })
+        .post("http://localhost:8000/navbar", data)
         .then((res) => {
           console.log(res);
         })
@@ -62,10 +65,15 @@ const Navbar = () => {
       setMenuItem(data.data.menuItem);
       setButtonText(data.data.buttonText);
       setButtonShow(data.data.buttonShow);
+      setLogo(data.data.image);
       setId(data.data._id);
     }
     getData();
   }, []);
+
+  const handleLogo = (e) => {
+    setImage(e.target.files[0]);
+  };
 
   return (
     <>
@@ -77,7 +85,12 @@ const Navbar = () => {
           <h2 className=" text-center text-2xl pb-4 border-b-4 border-double font-bold text-white">
             Navbar Section
           </h2>
-          <input type="file" className=" rounded-md text-white" />
+          <img width={50} src={`http://localhost:8000/${logo}`} alt="logo" />
+          <input
+            onChange={handleLogo}
+            type="file"
+            className=" rounded-md text-white"
+          />
           <input
             onChange={handleMenuItemChange}
             type="text"

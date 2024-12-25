@@ -7,6 +7,7 @@ const Navbar = () => {
   const [list, setList] = useState([]);
   const [buttonText, setButtonText] = useState("");
   const [buttonShow, setButtonShow] = useState(false);
+  const [image, setImage] = useState("");
 
   useEffect(() => {
     async function fetchData() {
@@ -14,6 +15,7 @@ const Navbar = () => {
       setList(data.data.menuItem.split(","));
       setButtonText(data.data.buttonText);
       setButtonShow(data.data.buttonShow);
+      setImage(data.data.image);
     }
     fetchData();
   }, []);
@@ -23,7 +25,7 @@ const Navbar = () => {
         <nav className=" flex justify-between items-center py-6">
           <div className=" w-[135px] h-[47px] overflow-hidden">
             <img
-              src="/src/assets/images/Logo.png"
+              src={`http://localhost:8000/${image}`}
               alt="logo"
               className=" w-full h-full object-cover"
             />

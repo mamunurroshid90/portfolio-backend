@@ -35,9 +35,9 @@ mongoose
   .then(() => console.log("Connected!"));
 
 // Navbar routes start here
-app.post("/navbar", function (req, res) {
-  console.log(req.body);
-  let data = new Navbar(req.body);
+app.post("/navbar", upload.single("image"), function (req, res) {
+  console.log(req.file, "navbar");
+  let data = new Navbar({ ...req.body, image: req.file.path });
   data.save();
   res.send({ message: "Navbar Created" });
 });
@@ -47,10 +47,13 @@ app.get("/navItem", async function (req, res) {
   res.send(data);
 });
 
-app.put("/navbar/:id", function (req, res) {
+app.put("/navbar/:id", upload.single("image"), function (req, res) {
   console.log(req.params.id);
   console.log(req.body);
-  Navbar.findByIdAndUpdate(req.params.id, req.body).then(() => {
+  Navbar.findByIdAndUpdate(req.params.id, {
+    ...req.body,
+    image: req.file.path,
+  }).then(() => {
     res.send({ message: "Navbar Updated" });
   });
 });

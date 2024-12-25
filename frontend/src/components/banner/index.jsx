@@ -1,6 +1,5 @@
 import React from "react";
-import RoundIcon from "../../assets/images/round-icon.png";
-import BannerImg from "../../assets/images/bannerImage.jpg";
+import { GrEmptyCircle } from "react-icons/gr";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
@@ -34,7 +33,7 @@ const Banner = () => {
           <div className=" grid grid-cols-[55fr,45fr] gap-9 items-center">
             <div className=" ">
               <div className=" flex items-center gap-1">
-                <img src={RoundIcon} alt="round-icon" />
+                <GrEmptyCircle className=" text-xl" />
                 <h4 className=" font-jost">{subHeading}</h4>
               </div>
               <h1 className=" text-[70px] font-jost font-bold leading-[95px]">
