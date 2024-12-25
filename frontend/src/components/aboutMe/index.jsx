@@ -3,6 +3,7 @@ import AboutMeImg from "../../assets/images/aboutMeImage.jpg";
 import CheckIcon from "../../assets/images/check-square.png";
 import RoundIcon from "../../assets/images/round-icon.png";
 import CompProjectIcon from "../../assets/images/compProjIcon.png";
+import ExperienceIcon from "../../assets/images/experienceIcon.png";
 import axios from "axios";
 
 const AboutMe = () => {
@@ -76,7 +77,7 @@ const AboutMe = () => {
               </div>
               <div className=" flex items-center gap-3">
                 <div className=" w-[60px] h-[58px] rounded-md bg-bgColor flex justify-center items-center">
-                  <img src={CompProjectIcon} alt="complProjectIcon" />
+                  <img src={ExperienceIcon} alt="complProjectIcon" />
                 </div>
                 <div>
                   <h2 className=" font-sans text-[21px] font-bold text-[#FF6B00]">

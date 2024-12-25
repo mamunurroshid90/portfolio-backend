@@ -155,8 +155,9 @@ const Resume = () => {
             placeholder="subTitle"
             className=" p-2 rounded-md w-full"
           />
-          <input
+          <textarea
             type="text"
+            rows={5}
             onChange={handleParagraph}
             value={paragraph}
             placeholder="Paragraph"

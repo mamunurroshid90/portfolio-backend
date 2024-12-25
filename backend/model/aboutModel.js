@@ -13,7 +13,9 @@ const aboutSchema = new Schema({
   projectCount: String,
   experienceYearText: String,
   experienceYearCount: String,
-  image: String,
+  aboutImg: String,
+  completeImg: String,
+  experienceImg: String,
 });
 
 module.exports = mongoose.model("About", aboutSchema);

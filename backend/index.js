@@ -84,8 +84,13 @@ app.put("/banner/:id", upload.single("image"), function (req, res) {
 });
 // Banner routes end here
 
+const cpUpload = upload.fields([
+  { name: "about", maxCount: 1 },
+  { name: "completeImg", maxCount: 1 },
+  { name: "experienceImg", maxCount: 1 },
+]);
 // About routes starts here
-app.post("/about", upload.single("image"), function (req, res) {
+app.post("/about", cpUpload, function (req, res) {
   console.log(req.file, "about");
   let data = new About({ ...req.body, image: req.file.path });
   data.save();
@@ -97,12 +102,13 @@ app.get("/about", async function (req, res) {
   res.send(data);
 });
 
-app.put("/about/:id", upload.single("image"), function (req, res) {
-  console.log(req.body);
-  console.log(req.params.id);
+app.put("/about/:id", cpUpload, function (req, res) {
+  console.log("Files:", req.files);
   About.findByIdAndUpdate(req.params.id, {
     ...req.body,
-    image: req.file.path,
+    aboutImg: req.files.about?.[0].path,
+    completeImg: req.files.completeImg?.[0].path,
+    experienceImg: req.files.experienceImg?.[0].path,
   }).then(() => {
     res.send({ message: "About Updated" });
   });

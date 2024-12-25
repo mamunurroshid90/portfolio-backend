@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const About = () => {
+  const [aboutInfo, setAboutInfo] = useState({});
   const [subHeading, setSubheading] = useState("");
   const [heading, setHeading] = useState("");
   const [clientDesign, setClientDesign] = useState("");
@@ -13,8 +14,8 @@ const About = () => {
   const [projectCount, setProjectCount] = useState("");
   const [experienceYearText, setExperienceYearText] = useState("");
   const [experienceYearCount, setExperienceYearCount] = useState("");
-  const [image, setImage] = useState({});
-  const [AboutImage, setAboutImage] = useState("");
+  const [aboutImg, setAboutImg] = useState({});
+  const [compProjectImg, setCompProjImg] = useState("");
   const [id, setId] = useState("");
 
   const handleSubheading = (e) => {
@@ -68,7 +69,7 @@ const About = () => {
       paragraph,
       buttonText,
       buttonShow,
-      image,
+      aboutImg,
       id
     );
 
@@ -85,7 +86,8 @@ const About = () => {
     data.append("projectCount", projectCount);
     data.append("experienceYearText", experienceYearText);
     data.append("experienceYearCount", experienceYearCount);
-    data.append("image", image);
+    data.append("about", aboutImg);
+    data.append("completeImg", compProjectImg);
     console.log(data.getAll("subHeading"));
 
     if (id) {
@@ -114,6 +116,7 @@ const About = () => {
       console.log("Mamun");
       let data = await axios.get("http://localhost:8000/about");
       console.log(data);
+      setAboutInfo(data.data);
       setSubheading(data.data.subHeading);
       setHeading(data.data.heading);
       setClientDesign(data.data.clientDesign);
@@ -125,15 +128,17 @@ const About = () => {
       setProjectCount(data.data.projectCount);
       setExperienceYearText(data.data.experienceYearText);
       setExperienceYearCount(data.data.experienceYearCount);
-      setAboutImage(data.data.image);
-
       setId(data.data._id);
     }
     fetchData();
   }, []);
 
   const handleImage = (e) => {
-    setImage(e.target.files[0]);
+    setAboutImg(e.target.files[0]);
+  };
+
+  const handleCompProjectImg = (e) => {
+    setCompProjImg(e.target.files[0]);
   };
 
   return (
@@ -145,8 +150,18 @@ const About = () => {
           </h2>
           <img
             width={50}
-            src={`http://localhost:8000/${AboutImage}`}
+            src={`http://localhost:8000/${aboutInfo.aboutImg}`}
             alt="about"
+          />
+          <img
+            width={50}
+            src={`http://localhost:8000/${aboutInfo.completeImg}`}
+            alt="completeProject"
+          />
+          <img
+            width={50}
+            src={`http://localhost:8000/${aboutInfo.experienceImg}`}
+            alt="completeProject"
           />
           <input
             onChange={handleImage}
@@ -167,6 +182,12 @@ const About = () => {
             type="text"
             className=" p-2 rounded-md"
             placeholder="Heading"
+          />
+          <input
+            onChange={handleCompProjectImg}
+            type="file"
+            name="completeProject"
+            id=""
           />
           <input
             onChange={handleProjectText}
