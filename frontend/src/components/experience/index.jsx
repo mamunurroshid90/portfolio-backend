@@ -3,13 +3,14 @@ import RoundedIcon from "../../assets/images/round-icon.png";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
+import baseUrl from "../../config/baseUrl";
 
 const Experience = () => {
   const [list, setList] = useState([]);
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/resume")
+      .get(`${baseUrl}/resume`)
       .then((res) => {
         setList(res.data);
       })

@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import baseUrl from "../config/baseUrl";
 
 const Navbar = () => {
   const [menuItem, setMenuItem] = useState("");
@@ -27,7 +28,7 @@ const Navbar = () => {
 
     if (id) {
       axios
-        .put("http://localhost:8000/navbar/" + id, data)
+        .put(`${baseUrl}/navbar/${id}`, data)
         .then((res) => {
           console.log(res);
         })
@@ -36,7 +37,7 @@ const Navbar = () => {
         });
     } else {
       axios
-        .post("http://localhost:8000/navbar", data)
+        .post(`${baseUrl}/navbar`, data)
         .then((res) => {
           console.log(res);
         })
@@ -60,7 +61,7 @@ const Navbar = () => {
 
   useEffect(() => {
     async function getData() {
-      let data = await axios.get("http://localhost:8000/navItem");
+      let data = await axios.get(`${baseUrl}/navItem`);
       console.log(data);
       setMenuItem(data.data.menuItem);
       setButtonText(data.data.buttonText);
@@ -85,7 +86,7 @@ const Navbar = () => {
           <h2 className=" text-center text-2xl pb-4 border-b-4 border-double font-bold text-white">
             Navbar Section
           </h2>
-          <img width={50} src={`http://localhost:8000/${logo}`} alt="logo" />
+          <img width={50} src={`${baseUrl}/${logo}`} alt="logo" />
           <input
             onChange={handleLogo}
             type="file"

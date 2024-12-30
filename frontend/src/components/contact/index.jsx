@@ -5,6 +5,7 @@ import { TfiEmail } from "react-icons/tfi";
 import RoundIcon from "../../assets/images/round-icon.png";
 import { useState } from "react";
 import axios from "axios";
+import baseUrl from "../../config/baseUrl";
 
 const Contact = () => {
   const [name, setName] = useState("");
@@ -17,7 +18,7 @@ const Contact = () => {
     e.preventDefault();
     console.log(name, email, phone, subject, message);
     axios
-      .post("http://localhost:8000/email", {
+      .post(`${baseUrl}/email`, {
         name,
         email,
         phone,

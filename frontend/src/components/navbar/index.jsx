@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
+import baseUrl from "../../config/baseUrl";
 
 const Navbar = () => {
   const [list, setList] = useState([]);
@@ -11,7 +12,7 @@ const Navbar = () => {
 
   useEffect(() => {
     async function fetchData() {
-      let data = await axios.get("http://localhost:8000/navItem");
+      let data = await axios.get(`${baseUrl}/navItem`);
       setList(data.data.menuItem.split(","));
       setButtonText(data.data.buttonText);
       setButtonShow(data.data.buttonShow);
@@ -25,7 +26,7 @@ const Navbar = () => {
         <nav className=" flex justify-between items-center py-6">
           <div className=" w-[135px] h-[47px] overflow-hidden">
             <img
-              src={`http://localhost:8000/${image}`}
+              src={`${baseUrl}/${image}`}
               alt="logo"
               className=" w-full h-full object-cover"
             />

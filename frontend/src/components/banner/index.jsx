@@ -3,6 +3,7 @@ import { GrEmptyCircle } from "react-icons/gr";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
+import baseUrl from "../../config/baseUrl";
 
 const Banner = () => {
   const [subHeading, setSubheading] = useState("");
@@ -14,7 +15,7 @@ const Banner = () => {
 
   useEffect(() => {
     async function fetchData() {
-      let data = await axios.get("http://localhost:8000/banner");
+      let data = await axios.get(`${baseUrl}/banner`);
       console.log(data);
       setSubheading(data.data.subHeading);
       setHeading(data.data.heading);
@@ -52,7 +53,7 @@ const Banner = () => {
             </div>
             <div className=" w-[550px] h-[750px] overflow-hidden">
               <img
-                src={`http://localhost:8000/${image}`}
+                src={`${baseUrl}/${image}`}
                 alt="banner-image"
                 className=" w-full h-full"
               />

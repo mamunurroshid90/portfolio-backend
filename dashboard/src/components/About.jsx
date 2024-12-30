@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import baseUrl from "../config/baseUrl";
 
 const About = () => {
   const [aboutInfo, setAboutInfo] = useState({});
@@ -94,7 +95,7 @@ const About = () => {
 
     if (id) {
       axios
-        .put("http://localhost:8000/about/" + id, data)
+        .put(`${baseUrl}/about/${id}`, data)
         .then((res) => {
           console.log(res);
         })
@@ -103,7 +104,7 @@ const About = () => {
         });
     } else {
       axios
-        .post("http://localhost:8000/about", data)
+        .post(`${baseUrl}/about`, data)
         .then((res) => {
           console.log(res);
         })
@@ -116,7 +117,7 @@ const About = () => {
   useEffect(() => {
     async function fetchData() {
       console.log("Mamun");
-      let data = await axios.get("http://localhost:8000/about");
+      let data = await axios.get(`${baseUrl}/about`);
       console.log(data);
       setAboutInfo(data.data);
       setSubheading(data.data.subHeading);
@@ -156,17 +157,17 @@ const About = () => {
           </h2>
           <img
             width={50}
-            src={`http://localhost:8000/${aboutInfo.aboutImg}`}
+            src={`${baseUrl}/${aboutInfo.aboutImg}`}
             alt="about"
           />
           <img
             width={50}
-            src={`http://localhost:8000/${aboutInfo.completeImg}`}
+            src={`${baseUrl}/${aboutInfo.completeImg}`}
             alt="completeProject"
           />
           <img
             width={50}
-            src={`http://localhost:8000/${aboutInfo.experienceImg}`}
+            src={`${baseUrl}/${aboutInfo.experienceImg}`}
             alt="experienceYear"
           />
           <input

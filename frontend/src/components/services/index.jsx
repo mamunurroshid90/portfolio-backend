@@ -11,12 +11,13 @@ import Business from "../../assets/images/services icon/business.png";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
+import baseUrl from "../../config/baseUrl";
 
 const Services = () => {
   const [list, setList] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:8000/service").then((res) => {
+    axios.get(`${baseUrl}/service`).then((res) => {
       setList(res.data);
     });
   }, []);

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { IoMdCheckboxOutline } from "react-icons/io";
 import { GrEmptyCircle } from "react-icons/gr";
 import axios from "axios";
+import baseUrl from "../../config/baseUrl";
 
 const AboutMe = () => {
   const [subHeading, setSubheading] = useState("");
@@ -23,7 +24,7 @@ const AboutMe = () => {
   console.log();
   useEffect(() => {
     async function fetchData() {
-      let data = await axios.get("http://localhost:8000/about");
+      let data = await axios.get(`${baseUrl}/about`);
       console.log(data.data);
       setSubheading(data.data.subHeading);
       setHeading(data.data.heading);
@@ -48,7 +49,7 @@ const AboutMe = () => {
         <div className=" grid grid-cols-[45fr,55fr] gap-[112px] items-center">
           <div className=" h-[770px]">
             <img
-              src={`http://localhost:8000/${aboutInfo}`}
+              src={`${baseUrl}/${aboutInfo}`}
               alt="aboutMe-img"
               className=" w-full h-full object-cover rounded-md"
             />
@@ -68,7 +69,7 @@ const AboutMe = () => {
               <div className=" flex items-center gap-3">
                 <div className=" w-[60px] h-[58px] rounded-md bg-bgColor flex justify-center items-center">
                   <img
-                    src={`http://localhost:8000/${compProjectImg}`}
+                    src={`${baseUrl}/${compProjectImg}`}
                     alt="complProjectIcon"
                   />
                 </div>
@@ -84,7 +85,7 @@ const AboutMe = () => {
               <div className=" flex items-center gap-3">
                 <div className=" w-[60px] h-[58px] rounded-md bg-bgColor flex justify-center items-center">
                   <img
-                    src={`http://localhost:8000/${experienceImg}`}
+                    src={`${baseUrl}/${experienceImg}`}
                     alt="complProjectIcon"
                   />
                 </div>
